@@ -23,8 +23,8 @@ export default function Header() {
           </Link>
         </h1>
 
-        <nav className={`gnav ${isOpen ? "js-slide" : ""}`} style={{ display: isOpen ? "block" : "none" }}>
-          <ul className="gnavNav">
+        <nav className={`gnav ${isOpen ? "js-slide" : ""}`}>
+          <ul className="gnavNav gnavMenu">
             <li>
               <Link href="/service/" onClick={closeMenu}>
                 Service
@@ -60,7 +60,7 @@ export default function Header() {
                 Line
               </Link>
             </li>
-            <li className="insta">
+            <li className="insta snsLink">
               <a href="https://www.instagram.com/wazawaza.inc" target="_blank" rel="noopener noreferrer">
                 <img src="/img/iconInsta.svg" alt="Instagram" />
               </a>
