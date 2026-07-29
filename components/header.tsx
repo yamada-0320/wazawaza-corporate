@@ -61,7 +61,7 @@ export default function Header() {
               </Link>
             </li>
             <li className="insta snsLink">
-              <a href="https://www.instagram.com/wazawaza.inc" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.instagram.com/wazawaza.inc" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <img src="/img/iconInsta.svg" alt="Instagram" />
               </a>
             </li>
