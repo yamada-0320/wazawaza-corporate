@@ -6,22 +6,15 @@ import Contact from "@/components/contact";
 
 export default function Home() {
   useEffect(() => {
-    // 1. 描画完了を確実にするため、次のフレーム（アニメーションフレーム）でクラスを付与開始
-    requestAnimationFrame(() => {
+    // 描画後、自然なタイミングでアニメーションを発火
+    const timer = setTimeout(() => {
       const logoArea = document.querySelector(".mvLogoArea");
       if (logoArea) logoArea.classList.add("js-on");
-    });
 
-    // 2. さらにほんの少し遅延させて、タイトル領域と白帯アニメーションを同時に発火
-    const timer = setTimeout(() => {
       const titleArea = document.querySelector(".titleArea");
       if (titleArea) titleArea.classList.add("move");
+    }, 200);
 
-      const passingBars = document.querySelectorAll(".mv-passing-bar");
-      passingBars.forEach((bar) => bar.classList.add("move"));
-    }, 150); // 150msの遅延でチラつきを防止
-
-    // 3. スクロール時の要素アニメーション発火用クラス
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -39,11 +32,10 @@ export default function Home() {
     fadeElements.forEach((el) => observer.observe(el));
 
     return () => {
-      clearTimeout(timer); // タイマーをクリア
-      observer.disconnect(); // 監視を解除
+      clearTimeout(timer);
+      observer.disconnect();
     };
   }, []);
-
   
   return (
     <main className="home">
