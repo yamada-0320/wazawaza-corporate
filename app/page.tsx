@@ -31,26 +31,27 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // 白帯のアニメーション（等幅スライド）
+  // 白帯のアニメーション
   const barAnimation = {
-    hidden: { x: "-101%" },
+    hidden: { x: "-100%" },
     visible: {
-      x: "101%",
+      x: "100%",
       transition: {
-        duration: 1.2,
+        duration: 1.5,
         ease: [0.77, 0, 0.175, 1],
       },
     },
   };
 
-  // テキストのアニメーション（白帯通過の瞬間に0 -> 1へパッと切り替え）
+  // テキストのアニメーション
   const textAnimation = {
     hidden: { opacity: 0 },
     visible: {
-      opacity: [0, 0, 1],
+      opacity: 1,
       transition: {
-        times: [0, 0.45, 0.46],
-        duration: 1.2,
+        duration: 0.8,
+        delay: 0.6,
+        ease: "easeInOut",
       },
     },
   };
@@ -71,7 +72,7 @@ export default function Home() {
                   overflow: "hidden",
                 }}
               >
-                {/* スライドする白帯 */}
+                {/* 白帯アニメーション */}
                 <motion.div
                   initial="hidden"
                   animate="visible"
@@ -86,7 +87,7 @@ export default function Home() {
                     zIndex: 2,
                   }}
                 />
-                {/* テキスト本体 */}
+                {/* テキストアニメーション */}
                 <motion.span
                   className="mv-passing-txt"
                   initial="hidden"
@@ -111,9 +112,10 @@ export default function Home() {
                   position: "relative",
                   display: "inline-block",
                   overflow: "hidden",
+                  marginTop: "1rem",
                 }}
               >
-                {/* スライドする白帯 */}
+                {/* 白帯アニメーション */}
                 <motion.div
                   initial="hidden"
                   animate="visible"
@@ -128,7 +130,7 @@ export default function Home() {
                     zIndex: 2,
                   }}
                 />
-                {/* テキスト本体 */}
+                {/* テキストアニメーション */}
                 <motion.span
                   className="mv-passing-txt"
                   initial="hidden"
