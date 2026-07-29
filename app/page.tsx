@@ -31,26 +31,26 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // 等幅で滑らかに通り抜ける白帯のアニメーション
+  // 白帯のアニメーション（等幅スライド）
   const barAnimation = {
     hidden: { x: "-101%" },
     visible: {
       x: "101%",
       transition: {
         duration: 1.2,
-        ease: [0.77, 0, 0.175, 1], // 元サイトと同一のイージング
+        ease: [0.77, 0, 0.175, 1],
       },
     },
   };
 
-  // 白帯が通過した瞬間にテキストを表示（最初から不透明度100%で露出）
+  // テキストのアニメーション（白帯通過の瞬間に0 -> 1へパッと切り替え）
   const textAnimation = {
     hidden: { opacity: 0 },
     visible: {
-      opacity: 1,
+      opacity: [0, 0, 1],
       transition: {
-        delay: 0.45,
-        duration: 0.01,
+        times: [0, 0.45, 0.46],
+        duration: 1.2,
       },
     },
   };
