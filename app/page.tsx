@@ -1,17 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Contact from "@/components/contact";
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
-    // クライアント側での描画準備完了フラグ
-    setMounted(true);
-
     // 1. ロゴアニメーション発火
     const logoArea = document.querySelector(".mvLogoArea");
     if (logoArea) logoArea.classList.add("js-on");
@@ -36,19 +31,19 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // 白帯のアニメーション
+  // 等幅で滑らかに通り抜ける白帯のアニメーション
   const barAnimation = {
     hidden: { x: "-101%" },
     visible: {
       x: "101%",
       transition: {
         duration: 1.2,
-        ease: [0.77, 0, 0.175, 1],
+        ease: [0.77, 0, 0.175, 1], // 元サイトと同一のイージング
       },
     },
   };
 
-  // テキストのアニメーション
+  // 白帯が通過した瞬間にテキストを表示（最初から不透明度100%で露出）
   const textAnimation = {
     hidden: { opacity: 0 },
     visible: {
@@ -77,38 +72,34 @@ export default function Home() {
                 }}
               >
                 {/* スライドする白帯 */}
-                {mounted && (
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={barAnimation}
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%",
-                      background: "#fff",
-                      zIndex: 2,
-                    }}
-                  />
-                )}
+                <motion.div
+                  initial="hidden"
+                  animate="visible"
+                  variants={barAnimation}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background: "#fff",
+                    zIndex: 2,
+                  }}
+                />
                 {/* テキスト本体 */}
-                {mounted && (
-                  <motion.span
-                    className="mv-passing-txt"
-                    initial="hidden"
-                    animate="visible"
-                    variants={textAnimation}
-                    style={{
-                      position: "relative",
-                      zIndex: 1,
-                      display: "block",
-                    }}
-                  >
-                    ワザワザやる
-                  </motion.span>
-                )}
+                <motion.span
+                  className="mv-passing-txt"
+                  initial="hidden"
+                  animate="visible"
+                  variants={textAnimation}
+                  style={{
+                    position: "relative",
+                    zIndex: 1,
+                    display: "block",
+                  }}
+                >
+                  ワザワザやる
+                </motion.span>
               </div>
 
               <br />
@@ -123,38 +114,34 @@ export default function Home() {
                 }}
               >
                 {/* スライドする白帯 */}
-                {mounted && (
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    variants={barAnimation}
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%",
-                      background: "#fff",
-                      zIndex: 2,
-                    }}
-                  />
-                )}
+                <motion.div
+                  initial="hidden"
+                  animate="visible"
+                  variants={barAnimation}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background: "#fff",
+                    zIndex: 2,
+                  }}
+                />
                 {/* テキスト本体 */}
-                {mounted && (
-                  <motion.span
-                    className="mv-passing-txt"
-                    initial="hidden"
-                    animate="visible"
-                    variants={textAnimation}
-                    style={{
-                      position: "relative",
-                      zIndex: 1,
-                      display: "block",
-                    }}
-                  >
-                    ワクワクする
-                  </motion.span>
-                )}
+                <motion.span
+                  className="mv-passing-txt"
+                  initial="hidden"
+                  animate="visible"
+                  variants={textAnimation}
+                  style={{
+                    position: "relative",
+                    zIndex: 1,
+                    display: "block",
+                  }}
+                >
+                  ワクワクする
+                </motion.span>
               </div>
             </h2>
           </div>
