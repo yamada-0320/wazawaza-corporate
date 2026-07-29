@@ -13,7 +13,11 @@ export default function Home() {
     const titleArea = document.querySelector(".titleArea");
     if (titleArea) titleArea.classList.add("move");
 
-    // 2. スクロール時の要素アニメーション発火用クラス
+    // 2. MVタイトル用テキストのアニメーション強制発火
+    const passingBars = document.querySelectorAll(".mv-passing-bar");
+    passingBars.forEach((bar) => bar.classList.add("move"));
+
+    // 3. スクロール時の要素アニメーション発火用クラス
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -35,21 +39,21 @@ export default function Home() {
 
   return (
     <main className="home">
-      {/* メインビジュアル（style={{ display: "block" }} を追加して表示化） */}
+      {/* メインビジュアル */}
       <section className="scMv" style={{ display: "block" }}>
         <div className="mvWrap">
-          <div className="passing-box titleArea">
+          <div className="passing-box titleArea move">
             <h2 className="mvTitle">
-              <span className="mv-passing-bar">
+              <span className="mv-passing-bar move">
                 <span className="mv-passing-txt">ワザワザやる</span>
               </span>
-              <span className="mv-passing-bar">
+              <span className="mv-passing-bar move">
                 <span className="mv-passing-txt">ワクワクする</span>
               </span>
             </h2>
           </div>
 
-          <div className="mvLogoArea">
+          <div className="mvLogoArea js-on">
             <div className="logoLeft">
               <svg
                 version="1.1"
