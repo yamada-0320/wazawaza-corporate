@@ -1374,6 +1374,7 @@ main {
 .scMv .mv-passing-txt {
   opacity: 0;
   display: block;
+  background-color: #fff;
 }
 
 /* moveクラスが付いたときのアニメーション挙動 */
