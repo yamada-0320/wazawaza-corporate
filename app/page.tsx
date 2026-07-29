@@ -16,7 +16,7 @@ export default function Home() {
       titleArea.classList.add("move");
     }
 
-    // 2. スクロール時の要素フェードイン
+    // 2. スクロール時の要素フェードイン（画面内に入ったら発火）
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -39,23 +39,23 @@ export default function Home() {
   return (
     <main>
       {/* メインビジュアル */}
-      <section className="scMv">
+      <section className="scMv" style={{ display: "block" }}>
         <div className="mvWrap">
           <div className="mvTitle">
-            <div className="titleArea">
+            <div className="titleArea move">
               <div className="mv-passing-box">
-                <div className="mv-passing-bar">
+                <div className="mv-passing-bar move">
                   <span className="mv-passing-txt">WHY WHY</span>
                 </div>
               </div>
               <div className="mv-passing-box">
-                <div className="mv-passing-bar">
+                <div className="mv-passing-bar move">
                   <span className="mv-passing-txt">WAZAWAZA</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="mvLogoArea">
+          <div className="mvLogoArea js-on">
             <div className="logoLeft">
               <svg
                 x="0px"
@@ -102,12 +102,12 @@ export default function Home() {
 
       {/* 01 ABOUT 自己紹介 */}
       <section className="scAbout wrap">
-        <div className="scTitle js-fadeUp">
+        <div className="scTitle js-fadeUp on">
           <span className="num">01</span>
-          <span className="en">ABOUT</span>
-          <span className="jp">自己紹介</span>
+          <span className="en active">ABOUT</span>
+          <span className="jp active">自己紹介</span>
         </div>
-        <div className="aboutText js-fadeUp">
+        <div className="aboutText js-fadeUp on">
           <p>
             たまたま、でもなく。
             <br />
@@ -136,18 +136,18 @@ export default function Home() {
       </section>
 
       {/* 中間キャッチ */}
-      <div className="bgArea js-fadeUp">
+      <div className="bgArea js-fadeUp on">
         <h2 className="bgTitle">ITは人の手で作る</h2>
       </div>
 
       {/* 02 SERVICE */}
       <section className="scService">
         <div className="wrap">
-          <div className="serviceText js-fadeUp">
+          <div className="serviceText js-fadeUp on">
             <div className="scTitle">
               <span className="num">02</span>
-              <span className="en">SERVICE</span>
-              <span className="jp">できること</span>
+              <span className="en active">SERVICE</span>
+              <span className="jp active">できること</span>
             </div>
             <p className="lead">
               技ｘ技 自分たちの特技や
@@ -164,7 +164,7 @@ export default function Home() {
               <Link href="/service/">詳しくサービス内容を読む</Link>
             </p>
           </div>
-          <div className="serviceImg js-fadeUp">
+          <div className="serviceImg js-fadeUp on">
             <img src="/img/serviceImg.jpg" alt="SERVICE" />
           </div>
         </div>
@@ -172,12 +172,12 @@ export default function Home() {
 
       {/* 03 PRODUCT */}
       <section className="scProduct">
-        <div className="wrap js-fadeUp">
+        <div className="wrap js-fadeUp on">
           <div className="productText">
             <div className="scTitle">
               <span className="num">03</span>
-              <span className="en">PRODUCT</span>
-              <span className="jp">つくったもの</span>
+              <span className="en active">PRODUCT</span>
+              <span className="jp active">つくったもの</span>
             </div>
             <p className="leed">
               ワイワイ、賑わう医院や店舗を。
@@ -190,14 +190,81 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="productSider js-fadeUp">
+        <div className="productSider js-fadeUp on">
           <div className="sliderItem">
             <img src="/img/mv.jpg" alt="事例" />
           </div>
         </div>
-        <p className="btn js-fadeUp">
+        <p className="btn js-fadeUp on">
           <Link href="/product/">他の事例をみる</Link>
         </p>
+      </section>
+
+      {/* 04 BLOG */}
+      <section className="scBlog">
+        <div className="wrap js-fadeUp on">
+          <div className="blogText">
+            <div className="scTitle">
+              <span className="num">04</span>
+              <span className="en active">BLOG</span>
+              <span className="jp active">ブログ</span>
+            </div>
+            <p className="leed">日々の気づきや開発の裏側を発信中。</p>
+          </div>
+          <p className="btn">
+            <Link href="/blog/">ブログ一覧をみる</Link>
+          </p>
+        </div>
+      </section>
+
+      {/* CONTACT お問い合わせ */}
+      <section className="scContact" id="contact">
+        <div className="wrap js-fadeUp on">
+          <div className="contactText">
+            <div className="scTitle">
+              <span className="en active">CONTACT</span>
+              <span className="jp active">お問い合わせ</span>
+            </div>
+            <p className="lead">
+              ご相談・お見積もりなど、
+              <br />
+              お気軽にお問い合わせください。
+            </p>
+          </div>
+          <div className="formArea">
+            <form>
+              <div className="inquiry">
+                <dl>
+                  <dt>
+                    <p>お名前</p>
+                  </dt>
+                  <dd>
+                    <input type="text" placeholder="山田 太郎" />
+                  </dd>
+                </dl>
+                <dl>
+                  <dt>
+                    <p>メールアドレス</p>
+                  </dt>
+                  <dd>
+                    <input type="email" placeholder="example@wazawaza.inc" />
+                  </dd>
+                </dl>
+                <dl className="textArea">
+                  <dt>
+                    <p>お問い合わせ内容</p>
+                  </dt>
+                  <dd>
+                    <textarea rows={5} placeholder="ご自由にご記入ください"></textarea>
+                  </dd>
+                </dl>
+                <div className="submitBtn">
+                  <input type="submit" value="送信する" />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </section>
     </main>
   );
