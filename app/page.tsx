@@ -11,47 +11,70 @@ export default function Home() {
     const logoArea = document.querySelector(".mvLogoArea");
     if (logoArea) logoArea.classList.add("js-on");
 
-    // 2. スクロール時の要素アニメーション発火用クラス
+    // 2. 見出しテキスト（.scTitle .en, .jp）の1文字ずつ<span>タグ分割
+    const titleElements = document.querySelectorAll(".scTitle .en, .scTitle .jp");
+    titleElements.forEach((el) => {
+      if (!el.classList.contains("js-split")) {
+        const text = el.textContent || "";
+        el.innerHTML = text
+          .split("")
+          .map((char) => (char.trim() === "" ? " " : `<span>${char}</span>`))
+          .join("");
+        el.classList.add("js-split");
+      }
+    });
+
+    // 3. スクロール監視（fadeUp, passing-bar, タイトル文字アニメーション）
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("on", "active", "move");
+            const target = entry.target;
+            target.classList.add("on", "active", "move");
+
+            // タイトルの1文字ずつ順次 active クラスを付与
+            if (target.classList.contains("en") || target.classList.contains("jp")) {
+              const spans = target.querySelectorAll("span");
+              spans.forEach((span, index) => {
+                setTimeout(() => {
+                  span.classList.add("active");
+                }, index * 60);
+              });
+            }
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
 
-    const fadeElements = document.querySelectorAll(
-      ".js-fadeUp, .scTitle .en span, .scTitle .jp span, .passing-bar"
+    const targetElements = document.querySelectorAll(
+      ".js-fadeUp, .scTitle .en, .scTitle .jp, .passing-bar"
     );
-    fadeElements.forEach((el) => observer.observe(el));
+    targetElements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
 
-  // 白帯のアニメーション（ロゴ再生から少し遅れて開始）
+  // 白帯のアニメーション設定
   const barAnimation = {
     hidden: { x: "-100%" },
     visible: {
       x: "100%",
       transition: {
         duration: 1.3,
-        delay: 0.8, // ← ロゴアニメーションを待つ時間差（0.8秒遅延）
+        delay: 0.8,
         ease: [0.77, 0, 0.175, 1],
       },
     },
   };
 
-  // テキストのアニメーション（白帯が通り抜けるタイミングに合わせて露出）
   const textAnimation = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         duration: 0.6,
-        delay: 1.3, // ← 0.8s(開始遅延) + 0.5s(白帯移動) = 1.3秒後に表示
+        delay: 1.3,
         ease: "easeInOut",
       },
     },
@@ -64,41 +87,19 @@ export default function Home() {
         <div className="mvWrap">
           <div className="passing-box titleArea">
             <h2 className="mvTitle">
-              {/* ワザワザやる */}
-              <div
-                className="mv-passing-bar"
-                style={{
-                  position: "relative",
-                  display: "inline-block",
-                  overflow: "hidden",
-                }}
-              >
-                {/* 白帯アニメーション */}
+              <div className="mv-passing-bar" style={{ position: "relative", display: "inline-block", overflow: "hidden" }}>
                 <motion.div
                   initial="hidden"
                   animate="visible"
                   variants={barAnimation}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    background: "#fff",
-                    zIndex: 2,
-                  }}
+                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "#fff", zIndex: 2 }}
                 />
-                {/* テキストアニメーション */}
                 <motion.span
                   className="mv-passing-txt"
                   initial="hidden"
                   animate="visible"
                   variants={textAnimation}
-                  style={{
-                    position: "relative",
-                    zIndex: 1,
-                    display: "block",
-                  }}
+                  style={{ position: "relative", zIndex: 1, display: "block" }}
                 >
                   ワザワザやる
                 </motion.span>
@@ -106,42 +107,19 @@ export default function Home() {
 
               <br />
 
-              {/* ワクワクする */}
-              <div
-                className="mv-passing-bar"
-                style={{
-                  position: "relative",
-                  display: "inline-block",
-                  overflow: "hidden",
-                  marginTop: "1rem",
-                }}
-              >
-                {/* 白帯アニメーション */}
+              <div className="mv-passing-bar" style={{ position: "relative", display: "inline-block", overflow: "hidden", marginTop: "1rem" }}>
                 <motion.div
                   initial="hidden"
                   animate="visible"
                   variants={barAnimation}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    background: "#fff",
-                    zIndex: 2,
-                  }}
+                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "#fff", zIndex: 2 }}
                 />
-                {/* テキストアニメーション */}
                 <motion.span
                   className="mv-passing-txt"
                   initial="hidden"
                   animate="visible"
                   variants={textAnimation}
-                  style={{
-                    position: "relative",
-                    zIndex: 1,
-                    display: "block",
-                  }}
+                  style={{ position: "relative", zIndex: 1, display: "block" }}
                 >
                   ワクワクする
                 </motion.span>
@@ -151,96 +129,26 @@ export default function Home() {
 
           <div className="mvLogoArea">
             <div className="logoLeft">
-              <svg
-                version="1.1"
-                id="レイヤー_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                viewBox="0 0 484.5 232.9"
-                xmlSpace="preserve"
-              >
-                <style type="text/css">
-                  {`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}
-                </style>
-                <g>
-                  <polyline
-                    className="st0 leftPath"
-                    points="18.1,125.8 102.6,210.9 191.9,121.2 280.6,210.9 468.6,22"
-                  />
-                </g>
+              <svg version="1.1" viewBox="0 0 484.5 232.9">
+                <style type="text/css">{`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}</style>
+                <g><polyline className="st0 leftPath" points="18.1,125.8 102.6,210.9 191.9,121.2 280.6,210.9 468.6,22" /></g>
               </svg>
             </div>
-
             <div className="logoRight">
-              <svg
-                version="1.1"
-                id="レイヤー_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                viewBox="0 0 365.1 142"
-                xmlSpace="preserve"
-              >
-                <style type="text/css">
-                  {`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}
-                </style>
-                <g>
-                  <polyline
-                    className="st0 rightPath"
-                    points="351.5,30.5 268.5,115.5 178.5,25.5 89.5,115.5 13,38.5"
-                  />
-                </g>
+              <svg version="1.1" viewBox="0 0 365.1 142">
+                <style type="text/css">{`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}</style>
+                <g><polyline className="st0 rightPath" points="351.5,30.5 268.5,115.5 178.5,25.5 89.5,115.5 13,38.5" /></g>
               </svg>
             </div>
-
-            <svg
-              className="logoLeftSp"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              x="0px"
-              y="0px"
-              viewBox="0 0 1406.5 232.9"
-              xmlSpace="preserve"
-            >
-              <style type="text/css">
-                {`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}
-              </style>
-              <g>
-                <path
-                  className="st0 leftPath"
-                  d="M0,124.9L940.1,125.8L1024.6,210.9L1113.9,121.2L1202.6,210.9L1390.6,22"
-                ></path>
-              </g>
+            <svg className="logoLeftSp" version="1.1" viewBox="0 0 1406.5 232.9">
+              <style type="text/css">{`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}</style>
+              <g><path className="st0 leftPath" d="M0,124.9L940.1,125.8L1024.6,210.9L1113.9,121.2L1202.6,210.9L1390.6,22"></path></g>
             </svg>
-
-            <svg
-              className="logoRightSp"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              x="0px"
-              y="0px"
-              viewBox="0 0 1326.8 142"
-              xmlSpace="preserve"
-            >
-              <style type="text/css">
-                {`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}
-              </style>
-              <g>
-                <path
-                  className="st0 rightPath"
-                  d="M1326.8,29.5L351.5,30.5L268.5,115.5L178.5,25.5L89.5,115.5L13,38.5"
-                ></path>
-              </g>
+            <svg className="logoRightSp" version="1.1" viewBox="0 0 1326.8 142">
+              <style type="text/css">{`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}</style>
+              <g><path className="st0 rightPath" d="M1326.8,29.5L351.5,30.5L268.5,115.5L178.5,25.5L89.5,115.5L13,38.5"></path></g>
             </svg>
-
-            <p className="logoText">
-              <img src="/img/logoText.svg" alt="" />
-            </p>
+            <p className="logoText"><img src="/img/logoText.svg" alt="" /></p>
           </div>
         </div>
       </section>
@@ -255,33 +163,18 @@ export default function Home() {
           </h3>
           <div className="aboutText">
             <p>
-              たまたま、でもなく。
-              <br />
-              なんとなく、でもなく。
-              <br />
-              <span className="passing-bar">
-                <span className="passing-txt">わざわざ</span>
-              </span>
-              、訪れたくなる。
-              <br className="u-sp" />
+              たまたま、でもなく。<br />
+              なんとなく、でもなく。<br />
+              <span className="passing-bar"><span className="passing-txt">わざわざ</span></span>、訪れたくなる。<br className="u-sp" />
               体験したくなる。
             </p>
             <p>
-              わざわざ、
-              <br />
-              対話を重ねて。手間ひまかけて。
-              <br />
-              大抵のことがテクノロジーで
-              <br />
-              解決できてしまう時代に、
-              <br />
-              あえて
-              <span className="passing-bar">
-                <span className="passing-txt">ヒューマンな関わり合い</span>
-              </span>
-              を<br />
-              大切にしながら
-              <br />
+              わざわざ、<br />
+              対話を重ねて。手間ひまかけて。<br />
+              大抵のことがテクノロジーで<br />
+              解決できてしまう時代に、<br />
+              あえて<span className="passing-bar"><span className="passing-txt">ヒューマンな関わり合い</span></span>を<br />
+              大切にしながら<br />
               お客様の成功まで伴走していきたい。
             </p>
           </div>
@@ -300,27 +193,15 @@ export default function Home() {
               <span className="en">SERVICE</span>
               <span className="jp">できること</span>
             </h3>
-
             <div className="serviceImg js-fadeUp">
               <img src="/img/serviceImg.jpg" alt="" />
             </div>
-
             <p className="lead">
-              <span className="passing-bar">
-                <span className="passing-txt">技ｘ技</span>
-              </span>
-              <br />
-              自分たちの特技や
-              <br />
-              ノウハウだけに閉じこもらず、
-              <br />
-              世の中の様々な人や組織が持つ
-              <br />
-              技能を掛け合わせ、混ぜ合わせることで、
-              <br />
+              <span className="passing-bar"><span className="passing-txt">技ｘ技</span></span><br />
+              自分たちの特技やノウハウだけに閉じこもらず、<br />
+              世の中の様々な人や組織が持つ技能を掛け合わせ、混ぜ合わせることで、<br />
               前例のないサービスを創造したい。
             </p>
-
             <p className="btn">
               <Link href="/service/">詳しくサービス内容を読む</Link>
             </p>
@@ -338,22 +219,15 @@ export default function Home() {
               <span className="jp">つくったもの</span>
             </h3>
             <p className="leed">
-              ワイワイ、賑わう医院や店舗を。
-              <br />
-              ワザワザ、世の中を揺さぶるものを。
-              <br />
-              <span className="passing-bar">
-                <span className="passing-txt">
-                  ワクワク、期待せずにはいられない未来を。
-                </span>
-              </span>
-              <br />
+              ワイワイ、賑わう医院や店舗を。<br />
+              ワザワザ、世の中を揺さぶるものを。<br />
+              <span className="passing-bar"><span className="passing-txt">ワクワク、期待せずにはいられない未来を。</span></span><br />
               WAZAWAZAとぜひご一緒に。
             </p>
           </div>
         </div>
 
-        {/* スライダー */}
+        {/* 事例スライダーエリア */}
         <div className="productSider">
           <p className="empty_list">事例はありません</p>
         </div>
@@ -363,7 +237,6 @@ export default function Home() {
         </p>
       </section>
 
-      {/* contact 共通コンポーネント呼出 */}
       <Contact />
     </main>
   );
