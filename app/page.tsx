@@ -35,7 +35,8 @@ export default function Home() {
 
   return (
     <main className="home">
-      <section className="scMv">
+      {/* メインビジュアル（style={{ display: "block" }} を追加して表示化） */}
+      <section className="scMv" style={{ display: "block" }}>
         <div className="mvWrap">
           <div className="passing-box titleArea">
             <h2 className="mvTitle">
@@ -262,7 +263,7 @@ export default function Home() {
         </p>
       </section>
 
-      {/* contact */}
+      {/* contact 共通コンポーネント呼出 */}
       <Contact />
     </main>
   );
