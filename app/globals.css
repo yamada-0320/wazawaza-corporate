@@ -1381,11 +1381,10 @@ main {
 	-webkit-animation: passing-barmv 1s ease 0s 1 normal forwards;
 	animation: passing-barmv 1s ease 0s 1 normal forwards;
 }
-/* アニメーション完了後に不透明度1（表示状態）を固定保持させる */
 .scMv .titleArea.move .mv-passing-txt {
-  -webkit-animation: passing-txtmv 0.5s ease 0.5s 1 normal forwards;
-  animation: passing-txtmv 0.5s ease 0.5s 1 normal forwards;
-  opacity: 1; /* ← これを追加することでアニメーション後も絶対に消えなくなります */
+  /* animation-fill-modeを確実に適応させ、0.5sの再生時間を確保 */
+  -webkit-animation: passing-txtmv 0.5s ease 0.5s 1 normal forwards !important;
+  animation: passing-txtmv 0.5s ease 0.5s 1 normal forwards !important;
 }
 
 .scMv .mvLogo {
