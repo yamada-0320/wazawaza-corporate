@@ -38,7 +38,7 @@ export default function Home() {
       x: "101%",
       transition: {
         duration: 1.2,
-        ease: [0.77, 0, 0.175, 1], // 元サイトと同一のイージング曲線
+        ease: [0.77, 0, 0.175, 1],
       },
     },
   };
@@ -86,7 +86,7 @@ export default function Home() {
                     zIndex: 2,
                   }}
                 />
-                {/* テキスト本体（白背景つき） */}
+                {/* テキスト本体（初期不透明度0を指定してチラつき防止） */}
                 <motion.span
                   className="mv-passing-txt"
                   initial="hidden"
@@ -96,6 +96,7 @@ export default function Home() {
                     position: "relative",
                     zIndex: 1,
                     display: "block",
+                    opacity: 0, // JS初期化前のチラつきを完全に防ぐ
                   }}
                 >
                   ワザワザやる
@@ -128,7 +129,7 @@ export default function Home() {
                     zIndex: 2,
                   }}
                 />
-                {/* テキスト本体（白背景つき） */}
+                {/* テキスト本体（初期不透明度0を指定してチラつき防止） */}
                 <motion.span
                   className="mv-passing-txt"
                   initial="hidden"
@@ -138,6 +139,7 @@ export default function Home() {
                     position: "relative",
                     zIndex: 1,
                     display: "block",
+                    opacity: 0, // JS初期化前のチラつきを完全に防ぐ
                   }}
                 >
                   ワクワクする
