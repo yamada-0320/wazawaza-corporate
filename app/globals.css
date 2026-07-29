@@ -1382,8 +1382,8 @@ main {
 	animation: passing-barmv 1s ease 0s 1 normal forwards;
 }
 .scMv .titleArea.move .mv-passing-txt {
-	-webkit-animation: passing-txtmv 0s ease 0.5s 1 normal forwards;
-	animation: passing-txtmv 0s ease 0.5s 1 normal forwards;
+  -webkit-animation: passing-txtmv 0.5s ease 0.5s 1 normal forwards;
+  animation: passing-txtmv 0.5s ease 0.5s 1 normal forwards;
 }
 
 .scMv .mvLogo {
