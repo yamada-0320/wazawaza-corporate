@@ -31,26 +31,25 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // 白帯のアニメーション（伸びながら通過する演出）
+  // 元サイトと同じ「等幅で滑らかに通り抜ける白帯」のアニメーション
   const barAnimation = {
-    hidden: { left: "-100%", right: "100%" },
+    hidden: { x: "-101%" },
     visible: {
-      left: ["-100%", "0%", "100%"],
-      right: ["100%", "0%", "-100%"],
+      x: "101%",
       transition: {
-        duration: 1.4,
-        ease: [0.77, 0, 0.175, 1],
+        duration: 1.2,
+        ease: [0.77, 0, 0.175, 1], // 元サイトと同一のイージング曲線
       },
     },
   };
 
-  // テキストのアニメーション（白帯通過の瞬間、即座に露出）
+  // 白帯が真ん中を通過した瞬間にテキストを表示（100%露出）
   const textAnimation = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        delay: 0.5, // 白帯が文字を覆った瞬間に100%表示
+        delay: 0.45,
         duration: 0.01,
       },
     },
@@ -70,10 +69,9 @@ export default function Home() {
                   position: "relative",
                   display: "inline-block",
                   overflow: "hidden",
-                  margin: "1rem 0",
                 }}
               >
-                {/* 白帯 */}
+                {/* スライドする白帯 */}
                 <motion.div
                   initial="hidden"
                   animate="visible"
@@ -81,12 +79,14 @@ export default function Home() {
                   style={{
                     position: "absolute",
                     top: 0,
-                    bottom: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
                     background: "#fff",
                     zIndex: 2,
                   }}
                 />
-                {/* テキスト */}
+                {/* テキスト本体（白背景つき） */}
                 <motion.span
                   className="mv-passing-txt"
                   initial="hidden"
@@ -96,8 +96,6 @@ export default function Home() {
                     position: "relative",
                     zIndex: 1,
                     display: "block",
-                    background: "#fff",
-                    padding: "0.2em 0.5em",
                   }}
                 >
                   ワザワザやる
@@ -113,10 +111,9 @@ export default function Home() {
                   position: "relative",
                   display: "inline-block",
                   overflow: "hidden",
-                  margin: "1rem 0",
                 }}
               >
-                {/* 白帯 */}
+                {/* スライドする白帯 */}
                 <motion.div
                   initial="hidden"
                   animate="visible"
@@ -124,12 +121,14 @@ export default function Home() {
                   style={{
                     position: "absolute",
                     top: 0,
-                    bottom: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
                     background: "#fff",
                     zIndex: 2,
                   }}
                 />
-                {/* テキスト */}
+                {/* テキスト本体（白背景つき） */}
                 <motion.span
                   className="mv-passing-txt"
                   initial="hidden"
@@ -139,8 +138,6 @@ export default function Home() {
                     position: "relative",
                     zIndex: 1,
                     display: "block",
-                    background: "#fff",
-                    padding: "0.2em 0.5em",
                   }}
                 >
                   ワクワクする
