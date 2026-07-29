@@ -5,15 +5,14 @@ export default function Header({ isTop = false }: { isTop?: boolean }) {
   return (
     <>
       <header id={isTop ? "homeHeader" : undefined}>
-        <div class="headerWrap">
-          <h1 class="siteLogo">
+        <div className="headerWrap">
+          <h1 className="siteLogo">
             <Link href="/">
               <img src="/img/logo.svg" alt="WAZAWAZA" />
             </Link>
           </h1>
-
-          <nav class="gnav">
-            <ul class="gnavMenu">
+          <nav className="gnav">
+            <ul className="gnavMenu">
               <li>
                 <Link href="/service/">Service</Link>
               </li>
@@ -40,22 +39,20 @@ export default function Header({ isTop = false }: { isTop?: boolean }) {
               href="https://www.instagram.com/wazawaza.inc"
               target="_blank"
               rel="noopener noreferrer"
-              class="snsLink"
+              className="snsLink"
             >
               <img src="/img/instaIcon.svg" alt="" />
               <span>Instagram</span>
             </a>
           </nav>
-
-          <p class="hamburgerMenu">
+          <p className="hamburgerMenu">
             <span></span>
             <span></span>
             <span></span>
           </p>
         </div>
       </header>
-
-      <div class="spFloat">
+      <div className="spFloat">
         <ul>
           <li>
             <Link href="/product/">事例を見る</Link>
