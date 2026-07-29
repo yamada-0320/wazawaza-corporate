@@ -13,7 +13,7 @@ export default function Home() {
     const titleArea = document.querySelector(".titleArea");
     if (titleArea) titleArea.classList.add("move");
 
-    // 2. MVタイトル用テキストのアニメーション強制発火
+    // 2. MVタイトル用テキストのアニメーション発火
     const passingBars = document.querySelectorAll(".mv-passing-bar");
     passingBars.forEach((bar) => bar.classList.add("move"));
 
@@ -45,10 +45,20 @@ export default function Home() {
           <div className="passing-box titleArea move">
             <h2 className="mvTitle">
               <span className="mv-passing-bar move">
-                <span className="mv-passing-txt">ワザワザやる</span>
+                <span
+                  className="mv-passing-txt"
+                  style={{ opacity: 1, visibility: "visible" }}
+                >
+                  ワザワザやる
+                </span>
               </span>
               <span className="mv-passing-bar move">
-                <span className="mv-passing-txt">ワクワクする</span>
+                <span
+                  className="mv-passing-txt"
+                  style={{ opacity: 1, visibility: "visible" }}
+                >
+                  ワクワクする
+                </span>
               </span>
             </h2>
           </div>
