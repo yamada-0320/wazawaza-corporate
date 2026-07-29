@@ -1,67 +1,44 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
-
   return (
     <header className="header">
-      <div className={`headerWrap ${isOpen ? "bgBlack" : ""}`}>
+      <div className="headerWrap">
         <h1 className="headerLogo">
-          <Link href="/" onClick={closeMenu}>
+          <Link href="/">
             <img src="/img/logo.svg" alt="WAZAWAZA" />
           </Link>
         </h1>
 
-        <nav className={`gnav ${isOpen ? "js-slide" : ""}`}>
-          <ul className="gnavNav gnavMenu">
+        <nav className="gnav">
+          <ul className="gnavNav">
             <li>
-              <Link href="/service/" onClick={closeMenu}>
-                Service
-              </Link>
+              <Link href="/service/">Service</Link>
             </li>
             <li>
-              <Link href="/product/" onClick={closeMenu}>
-                Product
-              </Link>
+              <Link href="/product/">Product</Link>
             </li>
             <li>
-              <Link href="/info/" onClick={closeMenu}>
-                Information
-              </Link>
+              <Link href="/info/">Information</Link>
             </li>
             <li>
-              <Link href="/news/" onClick={closeMenu}>
-                News
-              </Link>
+              <Link href="/news/">News</Link>
             </li>
             <li>
-              <Link href="/blog/" onClick={closeMenu}>
-                Blog
-              </Link>
+              <Link href="/blog/">Blog</Link>
             </li>
             <li>
-              <Link href="/#contact" onClick={closeMenu}>
-                Contact
-              </Link>
+              <Link href="/#contact">Contact</Link>
             </li>
             <li>
-              <Link href="/line/" onClick={closeMenu}>
-                Line
-              </Link>
+              <Link href="/line/">Line</Link>
             </li>
-            <li className="insta snsLink">
-              <a href="https://www.instagram.com/wazawaza.inc" target="_blank" rel="noopener noreferrer">
+            <li className="insta">
+              <a
+                href="https://www.instagram.com/wazawaza.inc"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img src="/img/iconInsta.svg" alt="Instagram" />
               </a>
             </li>
@@ -69,7 +46,7 @@ export default function Header() {
         </nav>
 
         {/* ハンバーガーボタン */}
-        <div className={`hamburgerMenu ${isOpen ? "is-active" : ""}`} onClick={toggleMenu}>
+        <div className="hamburgerMenu">
           <span></span>
           <span></span>
           <span></span>
