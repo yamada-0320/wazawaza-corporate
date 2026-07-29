@@ -6,20 +6,18 @@ import Contact from "@/components/contact";
 
 export default function Home() {
   useEffect(() => {
-    // 1. ロゴアニメーション発火
-    const logoArea = document.querySelector(".mvLogoArea");
-    if (logoArea) logoArea.classList.add("js-on");
-
-    // 2. ほんの少し遅らせてタイトル領域と白帯アニメーションを同時に発火
+    // 描画が完全に終わった後にアニメーションクラスをセットする
     const timer = setTimeout(() => {
+      const logoArea = document.querySelector(".mvLogoArea");
+      if (logoArea) logoArea.classList.add("js-on");
+
       const titleArea = document.querySelector(".titleArea");
       if (titleArea) titleArea.classList.add("move");
 
       const passingBars = document.querySelectorAll(".mv-passing-bar");
       passingBars.forEach((bar) => bar.classList.add("move"));
-    }, 200);
+    }, 500); // 500msの遅延を設けて確実に描画後の発火にする
 
-    // 3. スクロール時の要素アニメーション発火用クラス
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -42,6 +40,7 @@ export default function Home() {
     };
   }, []);
 
+  
   return (
     <main className="home">
       {/* メインビジュアル */}
