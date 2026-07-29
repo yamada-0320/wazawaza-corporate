@@ -578,10 +578,7 @@ summary {
 # =================================================================
 # フォント
 # =================================================================*/
-@font-face {
-	font-family: "";
-	src: url("");
-}
+
 
 .smallTitle{
 	font-size: 23px;
@@ -821,7 +818,7 @@ nav {
 
 .btn a::before {
 	content: "";
-	background: url("../img/lineLeft.png") no-repeat center center;
+	background: url("/img/lineLeft.png") no-repeat center center;
 	background-size: cover;
 	width: 123px;
 	height: 15px;
@@ -835,7 +832,7 @@ nav {
 
 .btn a::after {
 	content: "";
-	background: url("../img/lineRight.png") no-repeat center center;
+	background: url("/img/lineRight.png") no-repeat center center;
 	background-size: cover;
 	width: 103px;
 	height: 15px;
@@ -1240,7 +1237,7 @@ footer .copyright {
 
 /* .pageLead .pageLeadTitle span::before{
 content: '';
-background: url('../img/titleLeft.png') no-repeat center center;
+background: url('/img/titleLeft.png') no-repeat center center;
 background-size: cover;
 width: 103px;
 height: 15px;
@@ -1254,7 +1251,7 @@ transform: translateY(-50%);
 
 .pageLead .pageLeadTitle span::after{
 content: '';
-background: url('../img/titleRight.png') no-repeat center center;
+background: url('/img/titleRight.png') no-repeat center center;
 background-size: cover;
 width: 103px;
 height: 15px;
@@ -1514,7 +1511,7 @@ main {
 	width: 100%;
 	height: calc(100vh - 96px);
 	min-height: 680px;
-	background: url("../img/mv.jpg") no-repeat center center;
+	background: url("/img/mv.jpg") no-repeat center center;
 	background-size: cover;
 	position: relative;
 	display: none;
@@ -1934,7 +1931,7 @@ svg.logoRight {
 
 /* ITは手で取る */
 .bgArea {
-	background: url("../img/bgIT.jpg") no-repeat center center;
+	background: url("/img/bgIT.jpg") no-repeat center center;
 	background-size: cover;
 	height: 394px;
 	position: relative;
@@ -3125,7 +3122,7 @@ li:not(:last-child) {
 
 	.gnav .gnavMenu li::after {
 		content: "";
-		/* background:  url('../img/navLine1.svg') no-repeat left center;
+		/* background:  url('/img/navLine1.svg') no-repeat left center;
 		background-size: cover; */
 		width: 100%;
 		height: 28px;
@@ -3135,27 +3132,27 @@ li:not(:last-child) {
 	}
 
 	.gnav .gnavMenu li:nth-child(1)::after {
-		background: url("../img/navLine1.svg") no-repeat left center;
+		background: url("/img/navLine1.svg") no-repeat left center;
 		background-size: cover;
 	}
 
 	.gnav .gnavMenu li:nth-child(2)::after {
-		background: url("../img/navLine2.svg") no-repeat left center;
+		background: url("/img/navLine2.svg") no-repeat left center;
 		background-size: cover;
 	}
 
 	.gnav .gnavMenu li:nth-child(3)::after {
-		background: url("../img/navLine3.svg") no-repeat left center;
+		background: url("/img/navLine3.svg") no-repeat left center;
 		background-size: cover;
 	}
 
 	.gnav .gnavMenu li:nth-child(4)::after {
-		background: url("../img/navLine4.svg") no-repeat left center;
+		background: url("/img/navLine4.svg") no-repeat left center;
 		background-size: cover;
 	}
 
 	.gnav .gnavMenu li:nth-child(5)::after {
-		background: url("../img/navLine5.svg") no-repeat left center;
+		background: url("/img/navLine5.svg") no-repeat left center;
 		background-size: cover;
 	}
 
@@ -3299,7 +3296,7 @@ li:not(:last-child) {
 
 	/* メインビジュアル */
 	.scMv {
-		background: url("../img/mv.jpg") no-repeat 80% bottom;
+		background: url("/img/mv.jpg") no-repeat 80% bottom;
 		background-size: cover;
 		/* position: relative; */
 		height: calc(100vh - 100px);
@@ -3923,7 +3920,7 @@ li:not(:last-child) {
 
 	.gnav .gnavMenu li::after {
 		content: "";
-		/* background:  url('../img/navLine1.svg') no-repeat left center;
+		/* background:  url('/img/navLine1.svg') no-repeat left center;
 		background-size: cover; */
 		width: 100%;
 		height: 15px;
@@ -3933,27 +3930,27 @@ li:not(:last-child) {
 	}
 
 	.gnav .gnavMenu li:nth-child(1)::after {
-		background: url("../img/navLine1.svg") no-repeat left center;
+		background: url("/img/navLine1.svg") no-repeat left center;
 		background-size: cover;
 	}
 
 	.gnav .gnavMenu li:nth-child(2)::after {
-		background: url("../img/navLine2.svg") no-repeat right center;
+		background: url("/img/navLine2.svg") no-repeat right center;
 		background-size: cover;
 	}
 
 	.gnav .gnavMenu li:nth-child(3)::after {
-		background: url("../img/navLine3.svg") no-repeat left center;
+		background: url("/img/navLine3.svg") no-repeat left center;
 		background-size: cover;
 	}
 
 	.gnav .gnavMenu li:nth-child(4)::after {
-		background: url("../img/navLine4.svg") no-repeat right center;
+		background: url("/img/navLine4.svg") no-repeat right center;
 		background-size: cover;
 	}
 
 	.gnav .gnavMenu li:nth-child(5)::after {
-		background: url("../img/navLine5.svg") no-repeat left center;
+		background: url("/img/navLine5.svg") no-repeat left center;
 		background-size: cover;
 	}
 
@@ -4168,7 +4165,7 @@ li:not(:last-child) {
 		/* width: 100%; */
 		/* max-width: 980px; */
 		/* height: 600px; */
-		background: url("../img/mv.jpg") no-repeat 80% bottom;
+		background: url("/img/mv.jpg") no-repeat 80% bottom;
 		background-size: cover;
 		/* position: relative; */
 		height: calc(100vh - 100px);
@@ -5187,7 +5184,7 @@ main#pageSes{
 }
 #pageSes .keyv:after{
 	content:"";
-	background:url(../img/ses_keyv.jpg) no-repeat center center/cover;
+	background:url(/img/ses_keyv.jpg) no-repeat center center/cover;
 	height:85%;
 	width:90%;
 	position:absolute;
@@ -5568,7 +5565,7 @@ main#pageSes{
 #pageSes .ses_about_img{
 	height:513px;
 	width:100%;
-	background:url(../img/ses_about_img.jpg) no-repeat center 40%/cover;
+	background:url(/img/ses_about_img.jpg) no-repeat center 40%/cover;
 	position:relative;
 }
 #pageSes .ses_about_img:after{
@@ -5615,7 +5612,7 @@ main#pageSes{
 	margin-bottom:60px;
 }
 .member_img01{
-	background:url(../img/ses-member01.jpg) no-repeat center left/cover;
+	background:url(/img/ses-member01.jpg) no-repeat center left/cover;
 	width:68%;
 	min-height:645px;
 }
@@ -5664,17 +5661,17 @@ main#pageSes{
 	margin:30px 20px 0;
 }
 .member_img02{
-	background:url(../img/ses-member02.jpg) no-repeat center center/cover;
+	background:url(/img/ses-member02.jpg) no-repeat center center/cover;
 	width:100%;
 	aspect-ratio: 560 / 386;
 }
 .member_img03{
-	background:url(../img/ses-member03.jpg) no-repeat center center/cover;
+	background:url(/img/ses-member03.jpg) no-repeat center center/cover;
 	width:100%;
 	aspect-ratio: 560 / 386;
 }
 .member_img04{
-	background:url(../img/ses-member04.jpg) no-repeat center center/cover;
+	background:url(/img/ses-member04.jpg) no-repeat center center/cover;
 	width:100%;
 	aspect-ratio: 560 / 386;
 }
@@ -5719,7 +5716,7 @@ main#pageSes{
 
 /*還元率とは*/
 .return_ttl{
-	background:url(../img/kangen.jpg) no-repeat center center/cover;
+	background:url(/img/kangen.jpg) no-repeat center center/cover;
 	padding:70px 0;
 }
 #pageSes .return_ttl .wrap{
@@ -6029,7 +6026,7 @@ input[type=radio]:checked + span:before {
 }
 #pageSes input[type="submit"]{
 	display:inline-block;
-	background:#fff url(../img/btn.svg) no-repeat 30px center;
+	background:#fff url(/img/btn.svg) no-repeat 30px center;
 	border:solid 2px #396b9a;
 	border-radius:100px;
 	color:#19408f;
@@ -6047,7 +6044,7 @@ input[type=radio]:checked + span:before {
 }
 
 #pageSes input[type="submit"]:hover{
-	background:#396b9a url(../img/btn2.svg) no-repeat 30px center;
+	background:#396b9a url(/img/btn2.svg) no-repeat 30px center;
 	color:#fff;
 }
 @media screen and (max-width: 834px) {
