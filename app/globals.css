@@ -1,4 +1,7 @@
 @charset "UTF-8";
+html {
+  scroll-behavior: smooth;
+}
 /* Reset box-model */
 * {box-sizing: border-box;}
 ::before,::after {box-sizing: inherit;}
