@@ -31,26 +31,27 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // 白帯のアニメーション
+  // 白帯のアニメーション（ロゴ再生から少し遅れて開始）
   const barAnimation = {
     hidden: { x: "-100%" },
     visible: {
       x: "100%",
       transition: {
-        duration: 1.5,
+        duration: 1.3,
+        delay: 0.8, // ← ロゴアニメーションを待つ時間差（0.8秒遅延）
         ease: [0.77, 0, 0.175, 1],
       },
     },
   };
 
-  // テキストのアニメーション
+  // テキストのアニメーション（白帯が通り抜けるタイミングに合わせて露出）
   const textAnimation = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.8,
-        delay: 0.6,
+        duration: 0.6,
+        delay: 1.3, // ← 0.8s(開始遅延) + 0.5s(白帯移動) = 1.3秒後に表示
         ease: "easeInOut",
       },
     },
