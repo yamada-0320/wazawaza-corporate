@@ -6,19 +6,16 @@ import Contact from "@/components/contact";
 
 export default function Home() {
   useEffect(() => {
-    // アニメーションを確実に発火させるため、わずかに遅延させてクラスを付与
-    const timer = setTimeout(() => {
-      // 1. メインビジュアルのアニメーション発火用クラス
-      const logoArea = document.querySelector(".mvLogoArea");
-      if (logoArea) logoArea.classList.add("js-on");
+    // 1. メインビジュアルのアニメーション発火用クラス
+    const logoArea = document.querySelector(".mvLogoArea");
+    if (logoArea) logoArea.classList.add("js-on");
 
-      const titleArea = document.querySelector(".titleArea");
-      if (titleArea) titleArea.classList.add("move");
+    const titleArea = document.querySelector(".titleArea");
+    if (titleArea) titleArea.classList.add("move");
 
-      // 2. MVタイトル用テキスト・白帯のアニメーション発火
-      const passingBars = document.querySelectorAll(".mv-passing-bar");
-      passingBars.forEach((bar) => bar.classList.add("move"));
-    }, 100);
+    // 2. MVタイトル用テキスト・白帯のアニメーション発火
+    const passingBars = document.querySelectorAll(".mv-passing-bar");
+    passingBars.forEach((bar) => bar.classList.add("move"));
 
     // 3. スクロール時の要素アニメーション発火用クラス
     const observer = new IntersectionObserver(
@@ -37,14 +34,20 @@ export default function Home() {
     );
     fadeElements.forEach((el) => observer.observe(el));
 
-    return () => {
-      clearTimeout(timer);
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
     <main className="home">
+      {/* 白帯アニメーション終了後にテキストが消えないようにするための表示補正CSS */}
+      <style jsx global>{`
+        .mv-passing-bar.move .mv-passing-txt {
+          opacity: 1 !important;
+          visibility: visible !important;
+          animation-fill-mode: forwards !important;
+        }
+      `}</style>
+
       {/* メインビジュアル */}
       <section className="scMv" style={{ display: "block" }}>
         <div className="mvWrap">
