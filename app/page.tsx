@@ -55,7 +55,6 @@ export default function Home() {
                   x="0px"
                   y="0px"
                   viewBox="0 0 365.1 142"
-                  style={{ enableBackground: "new 0 0 365.1 142" }}
                   xmlSpace="preserve"
                 >
                   <style type="text/css">
