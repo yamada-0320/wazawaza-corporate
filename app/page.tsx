@@ -2,19 +2,16 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion"; // ライブラリを読み込み
 import Contact from "@/components/contact";
 
 export default function Home() {
   useEffect(() => {
-    // 描画後、自然なタイミングでアニメーションを発火
-    const timer = setTimeout(() => {
-      const logoArea = document.querySelector(".mvLogoArea");
-      if (logoArea) logoArea.classList.add("js-on");
+    // 1. ロゴアニメーション発火
+    const logoArea = document.querySelector(".mvLogoArea");
+    if (logoArea) logoArea.classList.add("js-on");
 
-      const titleArea = document.querySelector(".titleArea");
-      if (titleArea) titleArea.classList.add("move");
-    }, 200);
-
+    // 2. スクロール時の要素アニメーション発火用クラス
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -31,12 +28,33 @@ export default function Home() {
     );
     fadeElements.forEach((el) => observer.observe(el));
 
-    return () => {
-      clearTimeout(timer);
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
-  
+
+  // アニメーションの設定（ここで速度を調整できます）
+  const slowAnimation = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8, // 文字が浮かび上がる時間（ゆっくり）
+        delay: 0.6, // 白帯が通り過ぎるのを待つ時間（ゆっくり）
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  const slowBarAnimation = {
+    hidden: { x: "-100%" },
+    visible: {
+      x: "100%",
+      transition: {
+        duration: 1.5, // 白帯が通り抜ける時間（ゆっくり）
+        ease: [0.77, 0, 0.175, 1], // 元サイトと同じ緩急
+      },
+    },
+  };
+
   return (
     <main className="home">
       {/* メインビジュアル */}
@@ -44,12 +62,65 @@ export default function Home() {
         <div className="mvWrap">
           <div className="passing-box titleArea">
             <h2 className="mvTitle">
-              <span className="mv-passing-bar">
-                <span className="mv-passing-txt">ワザワザやる</span>
-              </span>
-              <span className="mv-passing-bar">
-                <span className="mv-passing-txt">ワクワクする</span>
-              </span>
+              {/* ワザワザやる */}
+              <div className="mv-passing-bar" style={{ position: "relative", overflow: "hidden" }}>
+                {/* 白帯アニメーション */}
+                <motion.div
+                  className="mv-passing-bar-mimic"
+                  initial="hidden"
+                  animate="visible"
+                  variants={slowBarAnimation}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background: "#fff",
+                    zIndex: 2,
+                  }}
+                />
+                {/* テキストアニメーション */}
+                <motion.span
+                  className="mv-passing-txt"
+                  initial="hidden"
+                  animate="visible"
+                  variants={slowAnimation}
+                  style={{ position: "relative", zIndex: 1, display: "block" }}
+                >
+                  ワザワザやる
+                </motion.span>
+              </div>
+
+              {/* ワクワクする */}
+              <div className="mv-passing-bar" style={{ position: "relative", overflow: "hidden", marginTop: "1rem" }}>
+                {/* 白帯アニメーション */}
+                <motion.div
+                  className="mv-passing-bar-mimic"
+                  initial="hidden"
+                  animate="visible"
+                  variants={slowBarAnimation}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background: "#fff",
+                    zIndex: 2,
+                  }}
+                />
+                {/* テキストアニメーション */}
+                <motion.span
+                  className="mv-passing-txt"
+                  initial="hidden"
+                  animate="visible"
+                  variants={slowAnimation}
+                  style={{ position: "relative", zIndex: 1, display: "block" }}
+                >
+                  ワクワクする
+                </motion.span>
+              </div>
             </h2>
           </div>
 
@@ -161,7 +232,7 @@ export default function Home() {
             <p>
               たまたま、でもなく。
               <br />
-              なんとなく、でもなく。
+              なんとなく、でもなく.
               <br />
               <span className="passing-bar">
                 <span className="passing-txt">わざわざ</span>
