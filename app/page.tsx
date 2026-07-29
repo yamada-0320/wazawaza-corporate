@@ -7,11 +7,12 @@ import Contact from "@/components/contact";
 
 export default function Home() {
   useEffect(() => {
-    // 1. ロゴアニメーション発火
+    // 1. メインビジュアルロゴアニメーション発火
     const logoArea = document.querySelector(".mvLogoArea");
     if (logoArea) logoArea.classList.add("js-on");
 
-    // 2. 見出しテキスト（.scTitle .en, .jp）の1文字ずつ<span>タグ分割
+    // 2. タイトルテキストの1文字ずつ<span>タグ分割 (元サイトのjQuery処理を完全再現)
+    // 対象は .scTitle の en / jp のみ（ヘッダー等は除外）
     const titleElements = document.querySelectorAll(".scTitle .en, .scTitle .jp");
     titleElements.forEach((el) => {
       if (!el.classList.contains("js-split")) {
@@ -24,7 +25,7 @@ export default function Home() {
       }
     });
 
-    // 3. スクロール監視（fadeUp, passing-bar, タイトル文字アニメーション）
+    // 3. スクロール・ロード監視 (元サイトの scroll/load 処理)
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -44,9 +45,10 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
+    // 監視対象は元サイトと同じ要素（.js-fadeUp, .scTitle の各要素, .passing-bar）
     const targetElements = document.querySelectorAll(
       ".js-fadeUp, .scTitle .en, .scTitle .jp, .passing-bar"
     );
@@ -80,7 +82,6 @@ export default function Home() {
     },
   };
 
-  // SVGインラインスタイルのReact形式定義
   const svgStyle = {
     fill: "none",
     stroke: "#FFFFFF",
@@ -257,7 +258,7 @@ export default function Home() {
         <h3 className="bgTitle">ITは人の手で作る</h3>
       </section>
 
-      {/* service (レイアウトクラスを元サイト構造へ修正) */}
+      {/* service */}
       <section className="scService">
         <div className="wrap">
           <div className="serviceWrap">
