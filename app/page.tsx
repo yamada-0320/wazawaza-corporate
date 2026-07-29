@@ -6,16 +6,19 @@ import Contact from "@/components/contact";
 
 export default function Home() {
   useEffect(() => {
-    // 1. メインビジュアルのアニメーション発火用クラス
-    const logoArea = document.querySelector(".mvLogoArea");
-    if (logoArea) logoArea.classList.add("js-on");
+    // アニメーションを確実に発火させるため、わずかに遅延させてクラスを付与
+    const timer = setTimeout(() => {
+      // 1. メインビジュアルのアニメーション発火用クラス
+      const logoArea = document.querySelector(".mvLogoArea");
+      if (logoArea) logoArea.classList.add("js-on");
 
-    const titleArea = document.querySelector(".titleArea");
-    if (titleArea) titleArea.classList.add("move");
+      const titleArea = document.querySelector(".titleArea");
+      if (titleArea) titleArea.classList.add("move");
 
-    // 2. MVタイトル用テキストのアニメーション発火
-    const passingBars = document.querySelectorAll(".mv-passing-bar");
-    passingBars.forEach((bar) => bar.classList.add("move"));
+      // 2. MVタイトル用テキスト・白帯のアニメーション発火
+      const passingBars = document.querySelectorAll(".mv-passing-bar");
+      passingBars.forEach((bar) => bar.classList.add("move"));
+    }, 100);
 
     // 3. スクロール時の要素アニメーション発火用クラス
     const observer = new IntersectionObserver(
@@ -34,7 +37,10 @@ export default function Home() {
     );
     fadeElements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -42,28 +48,18 @@ export default function Home() {
       {/* メインビジュアル */}
       <section className="scMv" style={{ display: "block" }}>
         <div className="mvWrap">
-          <div className="passing-box titleArea move">
+          <div className="passing-box titleArea">
             <h2 className="mvTitle">
-              <span className="mv-passing-bar move">
-                <span
-                  className="mv-passing-txt"
-                  style={{ opacity: 1, visibility: "visible" }}
-                >
-                  ワザワザやる
-                </span>
+              <span className="mv-passing-bar">
+                <span className="mv-passing-txt">ワザワザやる</span>
               </span>
-              <span className="mv-passing-bar move">
-                <span
-                  className="mv-passing-txt"
-                  style={{ opacity: 1, visibility: "visible" }}
-                >
-                  ワクワクする
-                </span>
+              <span className="mv-passing-bar">
+                <span className="mv-passing-txt">ワクワクする</span>
               </span>
             </h2>
           </div>
 
-          <div className="mvLogoArea js-on">
+          <div className="mvLogoArea">
             <div className="logoLeft">
               <svg
                 version="1.1"
