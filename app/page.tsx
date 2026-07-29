@@ -16,7 +16,7 @@ export default function Home() {
       titleArea.classList.add("move");
     }
 
-    // 2. スクロール時の要素フェードイン（js-fadeUp など）
+    // 2. スクロール時の要素フェードイン
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <main>
       {/* メインビジュアル */}
-      <section className="scMv" style={{ display: "block" }}>
+      <section className="scMv">
         <div className="mvWrap">
           <div className="mvTitle">
             <div className="titleArea">
