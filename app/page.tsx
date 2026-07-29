@@ -5,18 +5,14 @@ import Link from "next/link";
 
 export default function Home() {
   useEffect(() => {
-    // 1. トップページのMV/ロゴアニメーション用クラス付与
+    // 1. メインビジュアルのアニメーション発火用クラス
     const logoArea = document.querySelector(".mvLogoArea");
-    if (logoArea) {
-      logoArea.classList.add("js-on");
-    }
+    if (logoArea) logoArea.classList.add("js-on");
 
     const titleArea = document.querySelector(".titleArea");
-    if (titleArea) {
-      titleArea.classList.add("move");
-    }
+    if (titleArea) titleArea.classList.add("move");
 
-    // 2. スクロール時の要素フェードイン（画面内に入ったら発火）
+    // 2. スクロール時の要素アニメーション発火用クラス
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -37,120 +33,182 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
-      {/* メインビジュアル */}
-      <section className="scMv" style={{ display: "block" }}>
+    <main className="home">
+      <section className="scMv">
         <div className="mvWrap">
-          <div className="mvTitle">
-            <div className="titleArea move">
-              <div className="mv-passing-box">
-                <div className="mv-passing-bar move">
-                  <span className="mv-passing-txt">WHY WHY</span>
-                </div>
-              </div>
-              <div className="mv-passing-box">
-                <div className="mv-passing-bar move">
-                  <span className="mv-passing-txt">WAZAWAZA</span>
-                </div>
-              </div>
-            </div>
+          <div className="passing-box titleArea">
+            <h2 className="mvTitle">
+              <span className="mv-passing-bar">
+                <span className="mv-passing-txt">ワザワザやる</span>
+              </span>
+              <span className="mv-passing-bar">
+                <span className="mv-passing-txt">ワクワクする</span>
+              </span>
+            </h2>
           </div>
-          <div className="mvLogoArea js-on">
+
+          <div className="mvLogoArea">
             <div className="logoLeft">
               <svg
+                version="1.1"
+                id="レイヤー_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
                 x="0px"
                 y="0px"
                 viewBox="0 0 484.5 232.9"
                 xmlSpace="preserve"
               >
-                <path
-                  className="leftPath"
-                  fill="none"
-                  stroke="#FFFFFF"
-                  strokeWidth="18"
-                  strokeMiterlimit="10"
-                  d="M10.1,10.2l111,212.5l115.8-212.5l112,212.5L474.3,10.2"
-                />
+                <style type="text/css">
+                  {`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}
+                </style>
+                <g>
+                  <polyline
+                    className="st0 leftPath"
+                    points="18.1,125.8 102.6,210.9 191.9,121.2 280.6,210.9 468.6,22"
+                  />
+                </g>
               </svg>
             </div>
+
             <div className="logoRight">
               <svg
                 version="1.1"
                 id="レイヤー_1"
                 xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
                 x="0px"
                 y="0px"
                 viewBox="0 0 365.1 142"
                 xmlSpace="preserve"
               >
-                <path
-                  className="rightPath"
-                  fill="none"
-                  stroke="#FFFFFF"
-                  strokeWidth="18"
-                  strokeMiterlimit="10"
-                  d="M10.2,131.8L121.2,10.2l112,121.6L355,10.2"
-                />
+                <style type="text/css">
+                  {`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}
+                </style>
+                <g>
+                  <polyline
+                    className="st0 rightPath"
+                    points="351.5,30.5 268.5,115.5 178.5,25.5 89.5,115.5 13,38.5"
+                  />
+                </g>
               </svg>
             </div>
+
+            <svg
+              className="logoLeftSp"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 1406.5 232.9"
+              xmlSpace="preserve"
+            >
+              <style type="text/css">
+                {`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}
+              </style>
+              <g>
+                <path
+                  className="st0 leftPath"
+                  d="M0,124.9L940.1,125.8L1024.6,210.9L1113.9,121.2L1202.6,210.9L1390.6,22"
+                ></path>
+              </g>
+            </svg>
+
+            <svg
+              className="logoRightSp"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 1326.8 142"
+              xmlSpace="preserve"
+            >
+              <style type="text/css">
+                {`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}
+              </style>
+              <g>
+                <path
+                  className="st0 rightPath"
+                  d="M1326.8,29.5L351.5,30.5L268.5,115.5L178.5,25.5L89.5,115.5L13,38.5"
+                ></path>
+              </g>
+            </svg>
+
             <p className="logoText">
-              <img src="/img/mvText.svg" alt="WAZAWAZA" />
+              <img src="/img/logoText.svg" alt="" />
             </p>
           </div>
         </div>
       </section>
 
-      {/* 01 ABOUT 自己紹介 */}
-      <section className="scAbout wrap">
-        <div className="scTitle js-fadeUp on">
-          <span className="num">01</span>
-          <span className="en active">ABOUT</span>
-          <span className="jp active">自己紹介</span>
-        </div>
-        <div className="aboutText js-fadeUp on">
-          <p>
-            たまたま、でもなく。
-            <br />
-            なんとなく、でもなく。
-            <br />
-            わざわざ、訪れたくなる。
-            <br className="u-sp" />
-            体験したくなる。
-          </p>
-          <p>
-            わざわざ、対話を重ねて。
-            <br />
-            手間ひまかけて。
-            <br />
-            大抵のことがテクノロジーで
-            <br />
-            解決できてしまう時代に、
-            <br />
-            あえてヒューマンな関わり合いを
-            <br />
-            大切にしながらお客様の成功まで
-            <br />
-            伴走していきたい。
-          </p>
+      {/* about */}
+      <section className="scAbout">
+        <div className="wrap">
+          <h3 className="scTitle">
+            <span className="num">01</span>
+            <span className="en">ABOUT</span>
+            <span className="jp">自己紹介</span>
+          </h3>
+          <div className="aboutText">
+            <p>
+              たまたま、でもなく。
+              <br />
+              なんとなく、でもなく。
+              <br />
+              <span className="passing-bar">
+                <span className="passing-txt">わざわざ</span>
+              </span>
+              、訪れたくなる。
+              <br className="u-sp" />
+              体験したくなる。
+            </p>
+            <p>
+              わざわざ、
+              <br />
+              対話を重ねて。手間ひまかけて。
+              <br />
+              大抵のことがテクノロジーで
+              <br />
+              解決できてしまう時代に、
+              <br />
+              あえて
+              <span className="passing-bar">
+                <span className="passing-txt">ヒューマンな関わり合い</span>
+              </span>
+              を<br />
+              大切にしながら
+              <br />
+              お客様の成功まで伴走していきたい。
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* 中間キャッチ */}
-      <div className="bgArea js-fadeUp on">
-        <h2 className="bgTitle">ITは人の手で作る</h2>
-      </div>
+      <section className="bgArea">
+        <h3 className="bgTitle">ITは人の手で作る</h3>
+      </section>
 
-      {/* 02 SERVICE */}
       <section className="scService">
         <div className="wrap">
-          <div className="serviceText js-fadeUp on">
-            <div className="scTitle">
+          <div className="serviceText">
+            <h3 className="scTitle">
               <span className="num">02</span>
-              <span className="en active">SERVICE</span>
-              <span className="jp active">できること</span>
+              <span className="en">SERVICE</span>
+              <span className="jp">できること</span>
+            </h3>
+
+            <div className="serviceImg js-fadeUp">
+              <img src="/img/serviceImg.jpg" alt="" />
             </div>
+
             <p className="lead">
-              技ｘ技 自分たちの特技や
+              <span className="passing-bar">
+                <span className="passing-txt">技ｘ技</span>
+              </span>
+              <br />
+              自分たちの特技や
               <br />
               ノウハウだけに閉じこもらず、
               <br />
@@ -160,111 +218,47 @@ export default function Home() {
               <br />
               前例のないサービスを創造したい。
             </p>
+
             <p className="btn">
               <Link href="/service/">詳しくサービス内容を読む</Link>
             </p>
           </div>
-          <div className="serviceImg js-fadeUp on">
-            <img src="/img/serviceImg.jpg" alt="SERVICE" />
-          </div>
         </div>
       </section>
 
-      {/* 03 PRODUCT */}
+      {/* product */}
       <section className="scProduct">
-        <div className="wrap js-fadeUp on">
+        <div className="wrap">
           <div className="productText">
-            <div className="scTitle">
+            <h3 className="scTitle">
               <span className="num">03</span>
-              <span className="en active">PRODUCT</span>
-              <span className="jp active">つくったもの</span>
-            </div>
+              <span className="en">PRODUCT</span>
+              <span className="jp">つくったもの</span>
+            </h3>
             <p className="leed">
               ワイワイ、賑わう医院や店舗を。
               <br />
               ワザワザ、世の中を揺さぶるものを。
               <br />
-              ワクワク、期待せずにはいられない未来を。
+              <span className="passing-bar">
+                <span className="passing-txt">
+                  ワクワク、期待せずにはいられない未来を。
+                </span>
+              </span>
               <br />
               WAZAWAZAとぜひご一緒に。
             </p>
           </div>
         </div>
-        <div className="productSider js-fadeUp on">
-          <div className="sliderItem">
-            <img src="/img/mv.jpg" alt="事例" />
-          </div>
+
+        {/* スライダー */}
+        <div className="productSider">
+          <p className="empty_list">事例はありません</p>
         </div>
-        <p className="btn js-fadeUp on">
+
+        <p className="btn">
           <Link href="/product/">他の事例をみる</Link>
         </p>
-      </section>
-
-      {/* 04 BLOG */}
-      <section className="scBlog">
-        <div className="wrap js-fadeUp on">
-          <div className="blogText">
-            <div className="scTitle">
-              <span className="num">04</span>
-              <span className="en active">BLOG</span>
-              <span className="jp active">ブログ</span>
-            </div>
-            <p className="leed">日々の気づきや開発の裏側を発信中。</p>
-          </div>
-          <p className="btn">
-            <Link href="/blog/">ブログ一覧をみる</Link>
-          </p>
-        </div>
-      </section>
-
-      {/* CONTACT お問い合わせ */}
-      <section className="scContact" id="contact">
-        <div className="wrap js-fadeUp on">
-          <div className="contactText">
-            <div className="scTitle">
-              <span className="en active">CONTACT</span>
-              <span className="jp active">お問い合わせ</span>
-            </div>
-            <p className="lead">
-              ご相談・お見積もりなど、
-              <br />
-              お気軽にお問い合わせください。
-            </p>
-          </div>
-          <div className="formArea">
-            <form>
-              <div className="inquiry">
-                <dl>
-                  <dt>
-                    <p>お名前</p>
-                  </dt>
-                  <dd>
-                    <input type="text" placeholder="山田 太郎" />
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>
-                    <p>メールアドレス</p>
-                  </dt>
-                  <dd>
-                    <input type="email" placeholder="example@wazawaza.inc" />
-                  </dd>
-                </dl>
-                <dl className="textArea">
-                  <dt>
-                    <p>お問い合わせ内容</p>
-                  </dt>
-                  <dd>
-                    <textarea rows={5} placeholder="ご自由にご記入ください"></textarea>
-                  </dd>
-                </dl>
-                <div className="submitBtn">
-                  <input type="submit" value="送信する" />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
       </section>
     </main>
   );
