@@ -19,7 +19,7 @@ export default function Header() {
       <div className={`headerWrap ${isOpen ? "bgBlack" : ""}`}>
         <h1 className="headerLogo">
           <Link href="/" onClick={closeMenu}>
-            <img src="/img/logo.svg" alt="WAZAWAZA" />
+            <img src="/img/logo.svg" alt="WAZAWAZA" width={180} height={40} style={{ display: "block", height: "auto" }} />
           </Link>
         </h1>
 
