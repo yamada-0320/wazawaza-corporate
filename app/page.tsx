@@ -80,6 +80,14 @@ export default function Home() {
     },
   };
 
+  // SVGインラインスタイルのReact形式定義
+  const svgStyle = {
+    fill: "none",
+    stroke: "#FFFFFF",
+    strokeWidth: 35,
+    strokeMiterlimit: 10,
+  };
+
   return (
     <main className="home">
       {/* メインビジュアル */}
@@ -87,12 +95,23 @@ export default function Home() {
         <div className="mvWrap">
           <div className="passing-box titleArea">
             <h2 className="mvTitle">
-              <div className="mv-passing-bar" style={{ position: "relative", display: "inline-block", overflow: "hidden" }}>
+              <div
+                className="mv-passing-bar"
+                style={{ position: "relative", display: "inline-block", overflow: "hidden" }}
+              >
                 <motion.div
                   initial="hidden"
                   animate="visible"
                   variants={barAnimation}
-                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "#fff", zIndex: 2 }}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background: "#fff",
+                    zIndex: 2,
+                  }}
                 />
                 <motion.span
                   className="mv-passing-txt"
@@ -107,12 +126,28 @@ export default function Home() {
 
               <br />
 
-              <div className="mv-passing-bar" style={{ position: "relative", display: "inline-block", overflow: "hidden", marginTop: "1rem" }}>
+              <div
+                className="mv-passing-bar"
+                style={{
+                  position: "relative",
+                  display: "inline-block",
+                  overflow: "hidden",
+                  marginTop: "1rem",
+                }}
+              >
                 <motion.div
                   initial="hidden"
                   animate="visible"
                   variants={barAnimation}
-                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "#fff", zIndex: 2 }}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    background: "#fff",
+                    zIndex: 2,
+                  }}
                 />
                 <motion.span
                   className="mv-passing-txt"
@@ -130,25 +165,47 @@ export default function Home() {
           <div className="mvLogoArea">
             <div className="logoLeft">
               <svg version="1.1" viewBox="0 0 484.5 232.9">
-                <style type="text/css">{`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}</style>
-                <g><polyline className="st0 leftPath" points="18.1,125.8 102.6,210.9 191.9,121.2 280.6,210.9 468.6,22" /></g>
+                <g>
+                  <polyline
+                    style={svgStyle}
+                    className="st0 leftPath"
+                    points="18.1,125.8 102.6,210.9 191.9,121.2 280.6,210.9 468.6,22"
+                  />
+                </g>
               </svg>
             </div>
             <div className="logoRight">
               <svg version="1.1" viewBox="0 0 365.1 142">
-                <style type="text/css">{`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}</style>
-                <g><polyline className="st0 rightPath" points="351.5,30.5 268.5,115.5 178.5,25.5 89.5,115.5 13,38.5" /></g>
+                <g>
+                  <polyline
+                    style={svgStyle}
+                    className="st0 rightPath"
+                    points="351.5,30.5 268.5,115.5 178.5,25.5 89.5,115.5 13,38.5"
+                  />
+                </g>
               </svg>
             </div>
             <svg className="logoLeftSp" version="1.1" viewBox="0 0 1406.5 232.9">
-              <style type="text/css">{`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}</style>
-              <g><path className="st0 leftPath" d="M0,124.9L940.1,125.8L1024.6,210.9L1113.9,121.2L1202.6,210.9L1390.6,22"></path></g>
+              <g>
+                <path
+                  style={svgStyle}
+                  className="st0 leftPath"
+                  d="M0,124.9L940.1,125.8L1024.6,210.9L1113.9,121.2L1202.6,210.9L1390.6,22"
+                ></path>
+              </g>
             </svg>
             <svg className="logoRightSp" version="1.1" viewBox="0 0 1326.8 142">
-              <style type="text/css">{`.st0{fill:none;stroke:#FFFFFF;stroke-width:35;stroke-miterlimit:10;}`}</style>
-              <g><path className="st0 rightPath" d="M1326.8,29.5L351.5,30.5L268.5,115.5L178.5,25.5L89.5,115.5L13,38.5"></path></g>
+              <g>
+                <path
+                  style={svgStyle}
+                  className="st0 rightPath"
+                  d="M1326.8,29.5L351.5,30.5L268.5,115.5L178.5,25.5L89.5,115.5L13,38.5"
+                ></path>
+              </g>
             </svg>
-            <p className="logoText"><img src="/img/logoText.svg" alt="" /></p>
+            <p className="logoText">
+              <img src="/img/logoText.svg" alt="" />
+            </p>
           </div>
         </div>
       </section>
@@ -163,18 +220,33 @@ export default function Home() {
           </h3>
           <div className="aboutText">
             <p>
-              たまたま、でもなく。<br />
-              なんとなく、でもなく。<br />
-              <span className="passing-bar"><span className="passing-txt">わざわざ</span></span>、訪れたくなる。<br className="u-sp" />
+              たまたま、でもなく。
+              <br />
+              なんとなく、でもなく。
+              <br />
+              <span className="passing-bar">
+                <span className="passing-txt">わざわざ</span>
+              </span>
+              、訪れたくなる。
+              <br className="u-sp" />
               体験したくなる。
             </p>
             <p>
-              わざわざ、<br />
-              対話を重ねて。手間ひまかけて。<br />
-              大抵のことがテクノロジーで<br />
-              解決できてしまう時代に、<br />
-              あえて<span className="passing-bar"><span className="passing-txt">ヒューマンな関わり合い</span></span>を<br />
-              大切にしながら<br />
+              わざわざ、
+              <br />
+              対話を重ねて。手間ひまかけて。
+              <br />
+              大抵のことがテクノロジーで
+              <br />
+              解決できてしまう時代に、
+              <br />
+              あえて
+              <span className="passing-bar">
+                <span className="passing-txt">ヒューマンな関わり合い</span>
+              </span>
+              を<br />
+              大切にしながら
+              <br />
               お客様の成功まで伴走していきたい。
             </p>
           </div>
@@ -185,26 +257,41 @@ export default function Home() {
         <h3 className="bgTitle">ITは人の手で作る</h3>
       </section>
 
+      {/* service (レイアウトクラスを元サイト構造へ修正) */}
       <section className="scService">
         <div className="wrap">
-          <div className="serviceText">
-            <h3 className="scTitle">
-              <span className="num">02</span>
-              <span className="en">SERVICE</span>
-              <span className="jp">できること</span>
-            </h3>
+          <div className="serviceWrap">
             <div className="serviceImg js-fadeUp">
               <img src="/img/serviceImg.jpg" alt="" />
             </div>
-            <p className="lead">
-              <span className="passing-bar"><span className="passing-txt">技ｘ技</span></span><br />
-              自分たちの特技やノウハウだけに閉じこもらず、<br />
-              世の中の様々な人や組織が持つ技能を掛け合わせ、混ぜ合わせることで、<br />
-              前例のないサービスを創造したい。
-            </p>
-            <p className="btn">
-              <Link href="/service/">詳しくサービス内容を読む</Link>
-            </p>
+
+            <div className="serviceText">
+              <h3 className="scTitle">
+                <span className="num">02</span>
+                <span className="en">SERVICE</span>
+                <span className="jp">できること</span>
+              </h3>
+
+              <p className="lead">
+                <span className="passing-bar">
+                  <span className="passing-txt">技ｘ技</span>
+                </span>
+                <br />
+                自分たちの特技や
+                <br />
+                ノウハウだけに閉じこもらず、
+                <br />
+                世の中の様々な人や組織が持つ
+                <br />
+                技能を掛け合わせ、混ぜ合わせることで、
+                <br />
+                前例のないサービスを創造したい。
+              </p>
+
+              <p className="btn">
+                <Link href="/service/">詳しくサービス内容を読む</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -219,9 +306,14 @@ export default function Home() {
               <span className="jp">つくったもの</span>
             </h3>
             <p className="leed">
-              ワイワイ、賑わう医院や店舗を。<br />
-              ワザワザ、世の中を揺さぶるものを。<br />
-              <span className="passing-bar"><span className="passing-txt">ワクワク、期待せずにはいられない未来を。</span></span><br />
+              ワイワイ、賑わう医院や店舗を。
+              <br />
+              ワザワザ、世の中を揺さぶるものを。
+              <br />
+              <span className="passing-bar">
+                <span className="passing-txt">ワクワク、期待せずにはいられない未来を。</span>
+              </span>
+              <br />
               WAZAWAZAとぜひご一緒に。
             </p>
           </div>
