@@ -5731,7 +5731,7 @@ input[type=radio] +span::after {
 	left: 6px;
 	width: 8px;
 	height: 8px;
-	background-color: #c5a74c;
+	background-color: #333333;
 	opacity: 0;
 	transition: 0.3s;
 }
