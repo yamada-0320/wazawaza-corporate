@@ -26,7 +26,10 @@ export default function Header() {
             </Link>
           </h1>
 
-          <nav className={`gnav ${isOpen ? "js-slide" : ""}`}>
+          <nav
+            className={`gnav ${isOpen ? "js-slide" : ""}`}
+            style={{ display: isOpen ? "block" : "none" }}
+          >
             <ul className="gnavMenu">
               <li>
                 <Link href="/service/" onClick={closeMenu}>
