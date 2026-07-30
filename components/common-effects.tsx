@@ -118,7 +118,7 @@ export default function CommonEffects() {
             behavior: "smooth",
           });
 
-          // モバイルメニューが開いている場合のクローズ処理（クラス名・状態は維持）
+          // モバイルメニューが開いている場合のクローズ処理
           const headerWrap = document.querySelector(".headerWrap");
           if (headerWrap && headerWrap.classList.contains("bgBlack")) {
             headerWrap.classList.remove("bgBlack");
@@ -138,7 +138,9 @@ export default function CommonEffects() {
     };
 
     const links = document.querySelectorAll('a[href*="#"]');
-    links.forEach((link) => link.addEventListener("click", handleAnchorClick as EventListener));
+    links.forEach((link) =>
+      link.addEventListener("click", handleAnchorClick as EventListener)
+    );
 
     // 5. 内部リンク別ページ（URLにハッシュが含まれる場合の着地処理）
     if (window.location.hash) {
