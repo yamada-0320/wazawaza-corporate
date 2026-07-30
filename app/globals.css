@@ -5410,24 +5410,6 @@ input[type=radio] + span {
 	font-size:1.6rem;
 	line-height:200%;
 }
-input[type=radio] + span:before {
-	font-family: "Font Awesome 5 Free";
-	content: "\f111";
-	display: inline-block;
-	margin-right: 0.5em;
-	font-weight: 300;
-	color: #ddd;
-	vertical-align: middle;
-	background:#fff;
-	border-radius:15px;
-	font-size:2rem;
-}
-input[type=radio]:checked + span:before {
-	content: "\f192";
-	font-weight: 400;
-	color: #000;
-}
-
 #pageSes .submitBtn{
 	text-align:center;
 }
