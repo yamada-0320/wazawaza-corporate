@@ -7,13 +7,51 @@ import Contact from "@/components/contact";
 
 export default function Home() {
   useEffect(() => {
-    // 1. メインビジュアルロゴアニメーション発火
+    // 1. ヘッダー高さを考慮したスムーススクロール処理
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.currentTarget as HTMLAnchorElement;
+      const href = target.getAttribute("href");
+
+      if (href && (href.startsWith("#") || href.includes("/#"))) {
+        const hash = href.includes("#") ? "#" + href.split("#")[1] : "";
+        if (!hash || hash === "#") return;
+
+        const targetElement = document.querySelector(hash);
+        if (targetElement) {
+          e.preventDefault();
+
+          // <header>の現在の高さを動的に自動取得
+          const header = document.querySelector("header");
+          const headerHeight = header ? header.offsetHeight : 0;
+
+          // 対象要素の位置からヘッダー高さを引いて位置調整
+          const elementPosition =
+            targetElement.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - headerHeight;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+
+          history.pushState(null, "", hash);
+        }
+      }
+    };
+
+    const links = document.querySelectorAll('a[href*="#"]');
+    links.forEach((link) =>
+      link.addEventListener("click", handleAnchorClick as EventListener)
+    );
+
+    // 2. メインビジュアルロゴアニメーション発火
     const logoArea = document.querySelector(".mvLogoArea");
     if (logoArea) logoArea.classList.add("js-on");
 
-    // 2. タイトルテキストの1文字ずつ<span>タグ分割 (元サイトのjQuery処理を完全再現)
-    // 対象は .scTitle の en / jp のみ（ヘッダー等は除外）
-    const titleElements = document.querySelectorAll(".scTitle .en, .scTitle .jp");
+    // 3. タイトルテキストの1文字ずつ<span>タグ分割
+    const titleElements = document.querySelectorAll(
+      ".scTitle .en, .scTitle .jp"
+    );
     titleElements.forEach((el) => {
       if (!el.classList.contains("js-split")) {
         const text = el.textContent || "";
@@ -25,36 +63,55 @@ export default function Home() {
       }
     });
 
-    // 3. スクロール・ロード監視 (元サイトの scroll/load 処理)
+    // 文字アニメーションを動かす関数
+    const animateText = (target: Element) => {
+      if (
+        target.classList.contains("en") ||
+        target.classList.contains("jp")
+      ) {
+        const spans = target.querySelectorAll("span");
+        spans.forEach((span, index) => {
+          setTimeout(() => {
+            span.classList.add("active");
+          }, index * 60);
+        });
+      }
+    };
+
+    // 4. スクロール監視 (IntersectionObserver)
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const target = entry.target;
             target.classList.add("on", "active", "move");
-
-            // タイトルの1文字ずつ順次 active クラスを付与
-            if (target.classList.contains("en") || target.classList.contains("jp")) {
-              const spans = target.querySelectorAll("span");
-              spans.forEach((span, index) => {
-                setTimeout(() => {
-                  span.classList.add("active");
-                }, index * 60);
-              });
-            }
+            animateText(target);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
 
-    // 監視対象は元サイトと同じ要素（.js-fadeUp, .scTitle の各要素, .passing-bar）
     const targetElements = document.querySelectorAll(
       ".js-fadeUp, .scTitle .en, .scTitle .jp, .passing-bar"
     );
-    targetElements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    targetElements.forEach((el) => {
+      observer.observe(el);
+
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add("on", "active", "move");
+        animateText(el);
+      }
+    });
+
+    return () => {
+      links.forEach((link) =>
+        link.removeEventListener("click", handleAnchorClick as EventListener)
+      );
+      observer.disconnect();
+    };
   }, []);
 
   // 白帯のアニメーション設定
@@ -98,7 +155,11 @@ export default function Home() {
             <h2 className="mvTitle">
               <div
                 className="mv-passing-bar"
-                style={{ position: "relative", display: "inline-block", overflow: "hidden" }}
+                style={{
+                  position: "relative",
+                  display: "inline-block",
+                  overflow: "hidden",
+                }}
               >
                 <motion.div
                   initial="hidden"
@@ -186,7 +247,11 @@ export default function Home() {
                 </g>
               </svg>
             </div>
-            <svg className="logoLeftSp" version="1.1" viewBox="0 0 1406.5 232.9">
+            <svg
+              className="logoLeftSp"
+              version="1.1"
+              viewBox="0 0 1406.5 232.9"
+            >
               <g>
                 <path
                   style={svgStyle}
@@ -195,7 +260,11 @@ export default function Home() {
                 ></path>
               </g>
             </svg>
-            <svg className="logoRightSp" version="1.1" viewBox="0 0 1326.8 142">
+            <svg
+              className="logoRightSp"
+              version="1.1"
+              viewBox="0 0 1326.8 142"
+            >
               <g>
                 <path
                   style={svgStyle}
@@ -312,7 +381,9 @@ export default function Home() {
               ワザワザ、世の中を揺さぶるものを。
               <br />
               <span className="passing-bar">
-                <span className="passing-txt">ワクワク、期待せずにはいられない未来を。</span>
+                <span className="passing-txt">
+                  ワクワク、期待せずにはいられない未来を。
+                </span>
               </span>
               <br />
               WAZAWAZAとぜひご一緒に。
