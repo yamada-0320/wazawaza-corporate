@@ -4,14 +4,14 @@ export default function Header() {
   return (
     <header className="header">
       <div className="headerWrap">
-        <h1 className="siteLogo">
+        <h1 className="headerLogo">
           <Link href="/">
             <img src="/img/logo.svg" alt="WAZAWAZA" />
           </Link>
         </h1>
 
         <nav className="gnav">
-          <ul className="gnavMenu">
+          <ul className="gnavNav">
             <li>
               <Link href="/service/">Service</Link>
             </li>
@@ -33,7 +33,7 @@ export default function Header() {
             <li>
               <Link href="/line/">Line</Link>
             </li>
-            <li className="snsLink">
+            <li className="insta">
               <a
                 href="https://www.instagram.com/wazawaza.inc"
                 target="_blank"
