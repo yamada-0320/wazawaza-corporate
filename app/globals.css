@@ -5749,3 +5749,13 @@ input[type=radio] +span::after {
 	top: 50%;
 	transform:translatey(-50%);
 }
+/* ラジオボタン選択（:checked）時に「×」マークを非表示にする指定 */
+.scContact .inquiry input[type="radio"]:checked::before,
+.scContact .inquiry input[type="radio"]:checked::after {
+  content: ""; /* 「×」などのテキストコンテンツを消去 */
+}
+
+/* もし input 自体の background 画像等で「×」が入っている場合対策 */
+.scContact .inquiry input[type="radio"]:checked {
+  background-image: none; /* 背景画像による「×」を消去 */
+}
