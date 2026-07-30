@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import CommonEffects from "@/components/common-effects";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "WAZAWAZA - コーポレートサイト",
-  description: "株式会社WAZAWAZAのコーポレートサイトです。",
+  title: "WAZAWAZA",
+  description: "WAZAWAZA公式ウェブサイト",
 };
 
 export default function RootLayout({
@@ -16,13 +17,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-        {/* 全ページ共通ヘッダー */}
+        <CommonEffects />
         <Header />
-
-        {/* ページごとのメインコンテンツ（page.tsxなど） */}
         {children}
-
-        {/* 全ページ共通フッター */}
         <Footer />
       </body>
     </html>
