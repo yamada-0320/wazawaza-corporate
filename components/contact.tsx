@@ -1,4 +1,44 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 export default function Contact() {
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      const data = Object.fromEntries(formData.entries());
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        // PHP同様、送信成功時はサンクスページへ遷移
+        router.push("/thanks/");
+      } else {
+        alert("送信に失敗しました。時間をおいて再度お試しください。");
+        setIsSubmitting(false);
+      }
+    } catch (error) {
+      console.error("送信エラー:", error);
+      alert("送信中にエラーが発生しました。");
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="scContact" id="contact">
       <div className="wrap">
@@ -17,7 +57,7 @@ export default function Contact() {
         </div>
         <div className="formArea">
           <div className="inquiry">
-            <form action="" method="POST">
+            <form onSubmit={handleSubmit} method="POST">
               {/* 御社名 */}
               <dl>
                 <dt>
@@ -190,7 +230,11 @@ export default function Contact() {
 
               {/* 送信ボタン */}
               <p className="submitBtn">
-                <input type="submit" value="ワザワザ送信する" />
+                <input
+                  type="submit"
+                  value={isSubmitting ? "送信中..." : "ワザワザ送信する"}
+                  disabled={isSubmitting}
+                />
               </p>
             </form>
           </div>
