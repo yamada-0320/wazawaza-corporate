@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   return (
@@ -6,7 +7,13 @@ export default function Header() {
       <div className="headerWrap">
         <h1 className="headerLogo">
           <Link href="/">
-            <img src="/img/logo.svg" alt="WAZAWAZA" />
+            <Image
+              src="/img/logo.svg"
+              alt="WAZAWAZA"
+              width={180}
+              height={40}
+              priority
+            />
           </Link>
         </h1>
 
@@ -39,7 +46,12 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src="/img/iconInsta.svg" alt="Instagram" />
+                <Image
+                  src="/img/iconInsta.svg"
+                  alt="Instagram"
+                  width={20}
+                  height={20}
+                />
               </a>
             </li>
           </ul>
