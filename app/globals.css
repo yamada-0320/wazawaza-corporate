@@ -5700,19 +5700,3 @@ input[type=radio]:checked + span:before {
 	}
 }
 
-/* Instagramアイコン表示強制上書き */
-.headerWrap .gnav .gnavNav li.insta a,
-.headerWrap .gnav .gnavNav li.snsLink a {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.headerWrap .gnav .gnavNav li.insta img,
-.headerWrap .gnav .gnavNav li.snsLink img {
-  display: block !important;
-  width: 20px !important;
-  height: auto !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-}
