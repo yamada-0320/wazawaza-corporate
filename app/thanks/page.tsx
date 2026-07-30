@@ -1,16 +1,21 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useEffect } from "react";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "送信完了 | 株式会社WAZAWAZA",
-  description: "お問い合わせありがとうございました。",
-};
-
 export default function ThanksPage() {
+  useEffect(() => {
+    // ページ表示時に表示フラグのクラスを付与してテキストを表示させる
+    const pageHeadText = document.querySelector(".pageHeadText");
+    if (pageHeadText) {
+      pageHeadText.classList.add("on", "is-active");
+    }
+  }, []);
+
   return (
     <main>
       <div className="PageHead">
-        <div className="pageHeadText">
+        <div className="pageHeadText" style={{ opacity: 1 }}>
           <h2>
             <span className="en">THANKS</span>
             <br />
