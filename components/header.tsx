@@ -1,24 +1,17 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Header() {
   return (
     <header className="header">
       <div className="headerWrap">
-        <h1 className="headerLogo">
+        <h1 className="siteLogo">
           <Link href="/">
-            <Image
-              src="/img/logo.svg"
-              alt="WAZAWAZA"
-              width={180}
-              height={40}
-              priority
-            />
+            <img src="/img/logo.svg" alt="WAZAWAZA" />
           </Link>
         </h1>
 
         <nav className="gnav">
-          <ul className="gnavNav">
+          <ul className="gnavMenu">
             <li>
               <Link href="/service/">Service</Link>
             </li>
@@ -40,18 +33,13 @@ export default function Header() {
             <li>
               <Link href="/line/">Line</Link>
             </li>
-            <li className="insta">
+            <li className="snsLink">
               <a
                 href="https://www.instagram.com/wazawaza.inc"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Image
-                  src="/img/iconInsta.svg"
-                  alt="Instagram"
-                  width={20}
-                  height={20}
-                />
+                <img src="/img/iconInsta.svg" alt="Instagram" />
               </a>
             </li>
           </ul>
