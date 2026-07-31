@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main id="pageProduct" class="pageProduct">
+    <main id="pageProduct" className="pageProduct">
       <section className="scPageContets">
         <div className="wrap">
           <h3 className="titleBold">
