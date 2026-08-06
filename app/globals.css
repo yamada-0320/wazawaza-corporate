@@ -5732,3 +5732,50 @@ input[type=radio] +span::after {
 	transform:translatey(-50%);
 }
 
+/* ==========================================
+ * 他の事例を見る (c-carousel) 横並び・カード調整
+ * ========================================== */
+.c-carousel {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 40px;
+  justify-content: center;
+}
+
+.c-carousel__item {
+  width: calc(25% - 15px); /* 4列表示 */
+  box-sizing: border-box;
+}
+
+.c-carousel__item .sliderItem {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px; /* カード角丸 */
+  transition: opacity 0.3s ease;
+}
+
+.c-carousel__item .sliderItem:hover {
+  opacity: 0.8;
+}
+
+.c-carousel__item .sliderItem img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover; /* 画像の比率を保ったまま枠に収める */
+  display: block;
+}
+
+/* スマホ・タブレット表示用のレスポンシブ対応 */
+@media screen and (max-width: 768px) {
+  .c-carousel__item {
+    width: calc(50% - 10px); /* スマホは2列表示 */
+  }
+  .c-carousel__item .sliderItem img {
+    height: 120px;
+  }
+}
