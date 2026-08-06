@@ -89,7 +89,7 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
+      
       {/* about */}
       <section className="scAbout">
         <div className="wrap">
