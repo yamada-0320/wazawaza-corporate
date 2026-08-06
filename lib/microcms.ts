@@ -13,6 +13,7 @@ export const client = createClient({
   apiKey: process.env.MICROCMS_API_KEY,
 });
 
+// Product 型
 export type Product = {
   id: string;
   title: string;
@@ -34,23 +35,59 @@ export type Product = {
   publishedAt?: string;
 };
 
-// 一覧取得
+// Post (News / Blog) 型
+export type Post = {
+  id: string;
+  title: string;
+  content: string;
+  excerpt?: string;
+  category?: string[] | string;
+  thumbnail?: {
+    url: string;
+  };
+  publishedAt: string;
+};
+
+/* --- Product 用関数 --- */
 export async function getProducts(limit = 6, offset = 0) {
   return await client.getList<Product>({
     endpoint: "products",
+    queries: { limit, offset, orders: "-publishedAt" },
+  });
+}
+
+export async function getProductDetail(contentId: string) {
+  try {
+    return await client.getListDetail<Product>({ endpoint: "products", contentId });
+  } catch {
+    return null;
+  }
+}
+
+export async function getRecentProducts(limit = 4) {
+  return await client.getList<Product>({
+    endpoint: "products",
+    queries: { limit, orders: "-publishedAt" },
+  });
+}
+
+/* --- News / Blog (posts) 用関数 --- */
+export async function getPosts(categoryJp: string, limit = 6, offset = 0) {
+  return await client.getList<Post>({
+    endpoint: "posts",
     queries: {
       limit,
       offset,
       orders: "-publishedAt",
+      filters: `category[contains]${categoryJp}`,
     },
   });
 }
 
-// 単一詳細取得
-export async function getProductDetail(contentId: string) {
+export async function getPostDetail(contentId: string) {
   try {
-    return await client.getListDetail<Product>({
-      endpoint: "products",
+    return await client.getListDetail<Post>({
+      endpoint: "posts",
       contentId,
     });
   } catch {
@@ -58,13 +95,13 @@ export async function getProductDetail(contentId: string) {
   }
 }
 
-// 最新4件取得（「他の事例を見る」用）
-export async function getRecentProducts(limit = 4) {
-  return await client.getList<Product>({
-    endpoint: "products",
+export async function getRecentPosts(categoryJp: string, limit = 3) {
+  return await client.getList<Post>({
+    endpoint: "posts",
     queries: {
       limit,
       orders: "-publishedAt",
+      filters: `category[contains]${categoryJp}`,
     },
   });
 }
