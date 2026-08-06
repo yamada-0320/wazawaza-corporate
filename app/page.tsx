@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Contact from "@/components/contact";
 import ProductSlider from "@/components/ProductSlider";
-import { getRecentProducts } from "@/lib/microcms";
 
 export default function Home() {
   const [productPosts, setProductPosts] = useState<any[]>([]);
@@ -16,12 +15,6 @@ export default function Home() {
     if (logoArea) {
       logoArea.classList.add("js-on");
     }
-
-    // ↓ 事例データを取得してスライダーにセットする処理を追加
-    getRecentProducts(8).then((res) => {
-      setProductPosts(res.contents);
-    });
-    
   }, []);
 
   // 白帯のアニメーション設定
