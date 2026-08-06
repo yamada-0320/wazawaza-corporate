@@ -59,7 +59,6 @@ export default function ProductSlider({ posts }: Props) {
                   width: "100%",
                   aspectRatio: "16 / 10",
                   overflow: "hidden",
-                  borderRadius: "8px",
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
