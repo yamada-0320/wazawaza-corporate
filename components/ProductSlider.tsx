@@ -2,13 +2,11 @@
 
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import type { Product } from "@/lib/microcms";
 
-// Swiperの標準CSSを読み込み
+// Swiper基本スタイルの読み込み
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
 type Props = {
   posts: Product[];
@@ -19,31 +17,62 @@ export default function ProductSlider({ posts }: Props) {
     return <p className="empty_list">事例はありません</p>;
   }
 
+  // ループ動作を安定させるため、投稿数が少ない場合は配列を複製
+  const displayPosts =
+    posts.length < 6 ? [...posts, ...posts, ...posts] : posts;
+
   return (
-    <div className="productSider">
+    <div className="productSider" style={{ width: "100%", overflow: "hidden" }}>
       <Swiper
-        modules={[Autoplay, Navigation, Pagination]}
-        spaceBetween={20}
-        slidesPerView={1.2}
+        modules={[Autoplay]}
+        spaceBetween={24}
+        slidesPerView={1.3}
+        centeredSlides={true}
         loop={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
-        breakpoints={{
-          640: { slidesPerView: 2.2 },
-          1024: { slidesPerView: 3.5 },
+        speed={1000}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
         }}
-        style={{ width: "100%", paddingBottom: "20px" }}
+        breakpoints={{
+          640: {
+            slidesPerView: 2.2,
+            centeredSlides: false,
+          },
+          1024: {
+            slidesPerView: 3.2, // 表示数を抑えて画像を大きく表示
+            centeredSlides: false,
+          },
+        }}
+        style={{ width: "100%", padding: "10px 0" }}
       >
-        {posts.map((item) => {
+        {displayPosts.map((item, index) => {
           const thumb =
             item.thumbnail?.url || "/assets/img/common/no_image.jpg";
           return (
-            <SwiperSlide key={item.id}>
+            <SwiperSlide key={`${item.id}-${index}`}>
               <Link
                 href={`/product/detail/?id=${item.id}`}
                 className="sliderItem"
+                style={{
+                  display: "block",
+                  width: "100%",
+                  aspectRatio: "16 / 10",
+                  overflow: "hidden",
+                  borderRadius: "8px",
+                }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={thumb} alt={item.title} />
+                <img
+                  src={thumb}
+                  alt={item.title}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
               </Link>
             </SwiperSlide>
           );
