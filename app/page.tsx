@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Contact from "@/components/contact";
-import ProductSlider from "@/components/ProductSlider"; // 追加
-import { getRecentProducts } from "@/lib/microcms"; // 追加
 
 export default function Home() {
   useEffect(() => {
