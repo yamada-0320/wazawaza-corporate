@@ -1,43 +1,14 @@
-"use client";
-
-import { useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import Contact from "@/components/contact";
+import { getRecentProducts } from "@/lib/microcms";
 
-export default function Home() {
-  useEffect(() => {
-    // メインビジュアルロゴアニメーションの発火のみ（トップページ専用）
-    const logoArea = document.querySelector(".mvLogoArea");
-    if (logoArea) {
-      logoArea.classList.add("js-on");
-    }
-  }, []);
+// 60秒ごとに再生成（ISR）
+export const revalidate = 60;
 
-  // 白帯のアニメーション設定
-  const barAnimation = {
-    hidden: { x: "-100%" },
-    visible: {
-      x: "100%",
-      transition: {
-        duration: 1.3,
-        delay: 0.8,
-        ease: [0.77, 0, 0.175, 1],
-      },
-    },
-  };
-
-  const textAnimation = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        delay: 1.3,
-        ease: "easeInOut",
-      },
-    },
-  };
+export default async function Home() {
+  // microCMSから事例を取得（最新8件）
+  const response = await getRecentProducts(8);
+  const productPosts = response.contents;
 
   const svgStyle = {
     fill: "none",
@@ -61,33 +32,14 @@ export default function Home() {
                   overflow: "hidden",
                 }}
               >
-                <motion.div
-                  initial="hidden"
-                  animate="visible"
-                  variants={barAnimation}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    background: "#fff",
-                    zIndex: 2,
-                  }}
-                />
-                <motion.span
+                <span
                   className="mv-passing-txt"
-                  initial="hidden"
-                  animate="visible"
-                  variants={textAnimation}
                   style={{ position: "relative", zIndex: 1, display: "block" }}
                 >
                   ワザワザやる
-                </motion.span>
+                </span>
               </div>
-
               <br />
-
               <div
                 className="mv-passing-bar"
                 style={{
@@ -97,34 +49,17 @@ export default function Home() {
                   marginTop: "1rem",
                 }}
               >
-                <motion.div
-                  initial="hidden"
-                  animate="visible"
-                  variants={barAnimation}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    background: "#fff",
-                    zIndex: 2,
-                  }}
-                />
-                <motion.span
+                <span
                   className="mv-passing-txt"
-                  initial="hidden"
-                  animate="visible"
-                  variants={textAnimation}
                   style={{ position: "relative", zIndex: 1, display: "block" }}
                 >
                   ワクワクする
-                </motion.span>
+                </span>
               </div>
             </h2>
           </div>
 
-          <div className="mvLogoArea">
+          <div className="mvLogoArea js-on">
             <div className="logoLeft">
               <svg version="1.1" viewBox="0 0 484.5 232.9">
                 <g>
@@ -174,6 +109,7 @@ export default function Home() {
               </g>
             </svg>
             <p className="logoText">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/img/logoText.svg" alt="" />
             </p>
           </div>
@@ -210,10 +146,10 @@ export default function Home() {
               <br />
               解決できてしまう時代に、
               <br />
-              あえて
+              あえて{" "}
               <span className="passing-bar">
                 <span className="passing-txt">ヒューマンな関わり合い</span>
-              </span>
+              </span>{" "}
               を<br />
               大切にしながら
               <br />
@@ -232,16 +168,15 @@ export default function Home() {
         <div className="wrap">
           <div className="serviceWrap">
             <div className="serviceImg js-fadeUp">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/img/serviceImg.jpg" alt="" />
             </div>
-
             <div className="serviceText">
               <h3 className="scTitle">
                 <span className="num">02</span>
                 <span className="en">SERVICE</span>
                 <span className="jp">できること</span>
               </h3>
-
               <p className="lead">
                 <span className="passing-bar">
                   <span className="passing-txt">技ｘ技</span>
@@ -257,7 +192,6 @@ export default function Home() {
                 <br />
                 前例のないサービスを創造したい。
               </p>
-
               <p className="btn">
                 <Link href="/service/">詳しくサービス内容を読む</Link>
               </p>
@@ -291,9 +225,26 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 事例スライダーエリア */}
+        {/* 事例スライダーエリア（PHPのマークアップを忠実に適用） */}
         <div className="productSider">
-          <p className="empty_list">事例はありません</p>
+          {productPosts && productPosts.length > 0 ? (
+            productPosts.map((item) => {
+              const thumb =
+                item.thumbnail?.url || "/assets/img/common/no_image.jpg";
+              return (
+                <Link
+                  key={item.id}
+                  href={`/product/detail/?id=${item.id}`}
+                  className="sliderItem"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={thumb} alt={item.title} />
+                </Link>
+              );
+            })
+          ) : (
+            <p className="empty_list">事例はありません</p>
+          )}
         </div>
 
         <p className="btn">
