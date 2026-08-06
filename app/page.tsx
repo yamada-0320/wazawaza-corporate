@@ -1,14 +1,9 @@
 import Link from "next/link";
 import Contact from "@/components/contact";
-import ProductSlider from "@/components/ProductSlider";
-import { getRecentProducts } from "@/lib/microcms";
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const response = await getRecentProducts(8);
-  const productPosts = response.contents;
-
   const svgStyle = {
     fill: "none",
     stroke: "#FFFFFF",
@@ -198,8 +193,6 @@ export default async function Home() {
             </p>
           </div>
         </div>
-
-        <ProductSlider posts={productPosts} />
 
         <p className="btn">
           <Link href="/product/">他の事例をみる</Link>
