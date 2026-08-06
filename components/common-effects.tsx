@@ -7,66 +7,91 @@ export default function CommonEffects() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // 画面遷移後・ロード後すぐにアニメーションクラスを即時適用
-    const runAnimations = () => {
-      // 1. トップページ メインビジュアル（scMv）の即時発火
-      document.querySelectorAll(".mv-passing-bar").forEach((el) => {
-        el.classList.add("on", "move");
-      });
-      document.querySelectorAll(".mvLogoArea").forEach((el) => {
-        el.classList.add("js-on", "on");
-      });
+    // 1. タイトルテキストの1文字ずつ<span>分割処理
+    const titleTargets = document.querySelectorAll(
+      ".scTitle .en, .scTitle .jp, .pageHeadText h2 .en, .pageHeadText h2 .jp"
+    );
+    titleTargets.forEach((el) => {
+      if (!el.classList.contains("js-split")) {
+        const text = el.textContent || "";
+        el.innerHTML = text
+          .split("")
+          .map((char) => (char.trim() === "" ? " " : `<span>${char}</span>`))
+          .join("");
+        el.classList.add("js-split");
+      }
+    });
 
-      // 2. passing-bar（黒帯アニメーション）の即時判定・発火
-      document.querySelectorAll(".passing-bar").forEach((el) => {
-        el.classList.add("move");
-      });
-
-      // 3. 1文字ずつの<span>分割 ＆ タイトル演出
-      const titleTargets = document.querySelectorAll(
-        ".scTitle .en, .scTitle .jp, .pageHeadText h2 .en, .pageHeadText h2 .jp"
-      );
-      titleTargets.forEach((el) => {
-        if (!el.classList.contains("js-split")) {
-          const text = el.textContent || "";
-          el.innerHTML = text
-            .split("")
-            .map((char) => (char.trim() === "" ? " " : `<span>${char}</span>`))
-            .join("");
-          el.classList.add("js-split");
-        }
-      });
-
-      const animateSpans = (el: Element, speed: number) => {
-        if (el.classList.contains("js-animated")) return;
-        el.classList.add("js-animated");
-        const spans = el.querySelectorAll("span");
-        spans.forEach((span, index) => {
-          setTimeout(() => {
-            span.classList.add("active");
-          }, index * speed);
-        });
-      };
-
-      // 4. 表示領域内（または初期表示）のタイトルアニメーション即時実行
-      document.querySelectorAll(".scTitle .en, .scTitle .jp").forEach((el) => {
-        animateSpans(el, 60);
-      });
-      document
-        .querySelectorAll(".pageHeadText h2 .en, .pageHeadText h2 .jp")
-        .forEach((el) => {
-          animateSpans(el, 80);
-        });
-
-      // 5. フェードイン要素
-      document.querySelectorAll(".js-fadeUp").forEach((el) => {
-        el.classList.add("on");
+    // 2. 文字アニメーション関数
+    const animateSpans = (el: Element, speed: number) => {
+      if (el.classList.contains("js-animated")) return;
+      el.classList.add("js-animated");
+      const spans = el.querySelectorAll("span");
+      spans.forEach((span, index) => {
+        setTimeout(() => {
+          span.classList.add("active");
+        }, index * speed);
       });
     };
 
-    // 即時実行 ＋ レンダリング完了後（50ms）にも再実行
-    runAnimations();
-    const timer = setTimeout(runAnimations, 50);
+    // 3. スクロール ＆ ロード時判定
+    const handleScrollAndLoad = () => {
+      const windowHeight = window.innerHeight;
+      const scroll = window.scrollY;
+
+      // passing-bar
+      document.querySelectorAll(".passing-bar").forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const imgPos = rect.top + scroll;
+        if (scroll > imgPos - windowHeight + windowHeight / 4) {
+          el.classList.add("move");
+        }
+      });
+
+      // scTitle (.en, .jp)
+      document.querySelectorAll(".scTitle .en, .scTitle .jp").forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const elemPos = rect.top + scroll;
+        if (scroll > elemPos - windowHeight + 70) {
+          animateSpans(el, 60);
+        }
+      });
+
+      // pageHeadText h2 (.en, .jp)
+      document
+        .querySelectorAll(".pageHeadText h2 .en, .pageHeadText h2 .jp")
+        .forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          const elemPos = rect.top + scroll;
+          if (scroll > elemPos - windowHeight + 70) {
+            animateSpans(el, 80);
+          }
+        });
+
+      // js-fadeUp
+      document.querySelectorAll(".js-fadeUp").forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const elemPos = rect.top + scroll;
+        if (scroll > elemPos - windowHeight + 80) {
+          el.classList.add("on");
+        }
+      });
+
+      // spFloat
+      const spFloat = document.querySelector(".spFloat") as HTMLElement;
+      if (spFloat) {
+        if (scroll > 800) {
+          spFloat.style.display = "block";
+          spFloat.style.opacity = "1";
+        } else {
+          spFloat.style.display = "none";
+          spFloat.style.opacity = "0";
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScrollAndLoad);
+    handleScrollAndLoad();
 
     // スムーススクロール処理
     const handleAnchorClick = (e: MouseEvent) => {
@@ -115,7 +140,7 @@ export default function CommonEffects() {
     );
 
     return () => {
-      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScrollAndLoad);
       links.forEach((link) =>
         link.removeEventListener("click", handleAnchorClick as EventListener)
       );
