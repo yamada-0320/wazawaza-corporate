@@ -7,28 +7,8 @@ export default function CommonEffects() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // KEYV用：確実にDOMが配置された後にアニメーションを発火させる関数
-    const triggerMvAnimation = () => {
-      const passingBars = document.querySelectorAll(".mv-passing-bar");
-      passingBars.forEach((el) => {
-        el.classList.add("move", "on");
-      });
-
-      const logoAreas = document.querySelectorAll(".mvLogoArea");
-      logoAreas.forEach((el) => {
-        el.classList.add("js-on", "on");
-      });
-    };
-
-    // 即時実行 ＋ タイマー実行で確実にDOMへクラスを付与
-    triggerMvAnimation();
-    const timer1 = setTimeout(triggerMvAnimation, 100);
-    const timer2 = setTimeout(triggerMvAnimation, 500);
-
     // 1. タイトルテキストの1文字ずつ<span>分割処理
-    const titleTargets = document.querySelectorAll(
-      ".scTitle .en, .scTitle .jp, .pageHeadText h2 .en, .pageHeadText h2 .jp"
-    );
+    const titleTargets = document.querySelectorAll(".scTitle .en, .scTitle .jp");
     titleTargets.forEach((el) => {
       if (!el.classList.contains("js-split")) {
         const text = el.textContent || "";
@@ -74,17 +54,6 @@ export default function CommonEffects() {
           animateSpans(el, 60);
         }
       });
-
-      // pageHeadText h2 (.en, .jp)
-      document
-        .querySelectorAll(".pageHeadText h2 .en, .pageHeadText h2 .jp")
-        .forEach((el) => {
-          const rect = el.getBoundingClientRect();
-          const elemPos = rect.top + scroll;
-          if (scroll > elemPos - windowHeight + 70) {
-            animateSpans(el, 80);
-          }
-        });
 
       // js-fadeUp
       document.querySelectorAll(".js-fadeUp").forEach((el) => {
@@ -178,8 +147,6 @@ export default function CommonEffects() {
     }
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
       window.removeEventListener("scroll", handleScrollAndLoad);
       links.forEach((link) =>
         link.removeEventListener("click", handleAnchorClick as EventListener)
