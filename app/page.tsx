@@ -18,7 +18,7 @@ export default async function Home() {
 
   return (
     <main className="home">
-      {/* メインビジュアル */}
+      {/* メインビジュアル (keyv) */}
       <section className="scMv" style={{ display: "block" }}>
         <div className="mvWrap">
           <div className="passing-box titleArea">
@@ -31,12 +31,7 @@ export default async function Home() {
                   overflow: "hidden",
                 }}
               >
-                <span
-                  className="mv-passing-txt"
-                  style={{ position: "relative", zIndex: 1, display: "block" }}
-                >
-                  ワザワザやる
-                </span>
+                <span className="mv-passing-txt">ワザワザやる</span>
               </div>
               <br />
               <div
@@ -48,12 +43,7 @@ export default async function Home() {
                   marginTop: "1rem",
                 }}
               >
-                <span
-                  className="mv-passing-txt"
-                  style={{ position: "relative", zIndex: 1, display: "block" }}
-                >
-                  ワクワクする
-                </span>
+                <span className="mv-passing-txt">ワクワクする</span>
               </div>
             </h2>
           </div>
@@ -224,7 +214,6 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* スライダーコンポーネント */}
         <ProductSlider posts={productPosts} />
 
         <p className="btn">
