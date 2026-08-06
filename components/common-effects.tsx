@@ -7,11 +7,20 @@ export default function CommonEffects() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // -------------------------------------------------------------
+    // 【KEYV用】キービジュアルの帯アニメーション（.move / .on）を発火
+    // -------------------------------------------------------------
+    document.querySelectorAll(".mv-passing-bar").forEach((el) => {
+      el.classList.add("move", "on");
+    });
+    document.querySelectorAll(".mvLogoArea").forEach((el) => {
+      el.classList.add("js-on", "on");
+    });
+
     // 1. タイトルテキストの1文字ずつ<span>分割処理
     const titleTargets = document.querySelectorAll(
       ".scTitle .en, .scTitle .jp, .pageHeadText h2 .en, .pageHeadText h2 .jp"
     );
-
     titleTargets.forEach((el) => {
       if (!el.classList.contains("js-split")) {
         const text = el.textContent || "";
@@ -108,7 +117,6 @@ export default function CommonEffects() {
           e.preventDefault();
           const isDesktop = window.innerWidth > 834;
           const headerOffset = isDesktop ? 140 : 60;
-
           const elementPosition =
             targetElement.getBoundingClientRect().top + window.scrollY;
           const offsetPosition = elementPosition - headerOffset;
@@ -118,7 +126,7 @@ export default function CommonEffects() {
             behavior: "smooth",
           });
 
-          // モバイルメニューが開いている場合のクローズ処理（クラス名・状態は維持）
+          // モバイルメニューが開いている場合のクローズ処理
           const headerWrap = document.querySelector(".headerWrap");
           if (headerWrap && headerWrap.classList.contains("bgBlack")) {
             headerWrap.classList.remove("bgBlack");
@@ -138,13 +146,14 @@ export default function CommonEffects() {
     };
 
     const links = document.querySelectorAll('a[href*="#"]');
-    links.forEach((link) => link.addEventListener("click", handleAnchorClick as EventListener));
+    links.forEach((link) =>
+      link.addEventListener("click", handleAnchorClick as EventListener)
+    );
 
     // 5. 内部リンク別ページ（URLにハッシュが含まれる場合の着地処理）
     if (window.location.hash) {
       const urlHash = window.location.hash;
       window.scrollTo(0, 0);
-
       setTimeout(() => {
         const target = document.querySelector(urlHash);
         if (target) {
@@ -152,7 +161,6 @@ export default function CommonEffects() {
           const headerOffset = isSp ? 70 : 140;
           const position =
             target.getBoundingClientRect().top + window.scrollY - headerOffset;
-
           window.scrollTo({
             top: position,
             behavior: "smooth",
