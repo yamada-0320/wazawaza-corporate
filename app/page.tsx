@@ -5,11 +5,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Contact from "@/components/contact";
 import ProductSlider from "@/components/ProductSlider";
-import { getRecentProducts, ProductPost } from "@/lib/microcms"; // ← ProductPost を追加
+import { getRecentProducts } from "@/lib/microcms";
 
 export default function Home() {
-  // ↓ この1行を追加して未定義エラーを防ぐ
-  const [productPosts, setProductPosts] = useState<ProductPost[]>([]);
+  const [productPosts, setProductPosts] = useState<any[]>([]);
   
   useEffect(() => {
     // メインビジュアルロゴアニメーションの発火のみ（トップページ専用）
