@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react"; // ← useState を追加
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Contact from "@/components/contact";
