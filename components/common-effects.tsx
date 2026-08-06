@@ -7,20 +7,7 @@ export default function CommonEffects() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // 1. キービジュアル（scMv）アニメーションの即時発火
-    const triggerMvAnimation = () => {
-      document.querySelectorAll(".mv-passing-bar").forEach((el) => {
-        el.classList.add("move", "on");
-      });
-      document.querySelectorAll(".mvLogoArea").forEach((el) => {
-        el.classList.add("js-on", "on");
-      });
-    };
-
-    triggerMvAnimation();
-    const mvTimer = setTimeout(triggerMvAnimation, 100);
-
-    // 2. タイトルテキストの1文字ずつ<span>分割処理
+    // 1. タイトルテキストの1文字ずつ<span>分割処理
     const titleTargets = document.querySelectorAll(
       ".scTitle .en, .scTitle .jp, .pageHeadText h2 .en, .pageHeadText h2 .jp"
     );
@@ -35,7 +22,7 @@ export default function CommonEffects() {
       }
     });
 
-    // 3. 文字アニメーション関数
+    // 2. 文字アニメーション関数
     const animateSpans = (el: Element, speed: number) => {
       if (el.classList.contains("js-animated")) return;
       el.classList.add("js-animated");
@@ -47,7 +34,7 @@ export default function CommonEffects() {
       });
     };
 
-    // 4. スクロール ＆ ロード時判定（passing-bar, フェードイン, 文字演出）
+    // 3. スクロール ＆ ロード時判定（passing-bar, フェードイン, 文字演出）
     const handleScrollAndLoad = () => {
       const windowHeight = window.innerHeight;
       const scroll = window.scrollY;
@@ -104,9 +91,9 @@ export default function CommonEffects() {
     };
 
     window.addEventListener("scroll", handleScrollAndLoad);
-    handleScrollAndLoad();
+    handleScrollAndLoad(); // 初回ロード時実行
 
-    // 5. 同一ページ内のスムーススクロール処理
+    // 4. 同一ページ内のスムーススクロール処理
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.currentTarget as HTMLAnchorElement;
       const href = target.getAttribute("href");
@@ -153,7 +140,7 @@ export default function CommonEffects() {
       link.addEventListener("click", handleAnchorClick as EventListener)
     );
 
-    // 6. 内部リンク別ページ（URLにハッシュが含まれる場合の着地処理）
+    // 5. 内部リンク別ページ（URLにハッシュが含まれる場合の着地処理）
     if (window.location.hash) {
       const urlHash = window.location.hash;
       window.scrollTo(0, 0);
@@ -173,7 +160,6 @@ export default function CommonEffects() {
     }
 
     return () => {
-      clearTimeout(mvTimer);
       window.removeEventListener("scroll", handleScrollAndLoad);
       links.forEach((link) =>
         link.removeEventListener("click", handleAnchorClick as EventListener)
