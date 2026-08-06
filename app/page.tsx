@@ -1,17 +1,28 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react"; // ← useState を追加
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Contact from "@/components/contact";
+import ProductSlider from "@/components/ProductSlider";
+import { getRecentProducts, ProductPost } from "@/lib/microcms"; // ← ProductPost を追加
 
 export default function Home() {
+  // ↓ この1行を追加して未定義エラーを防ぐ
+  const [productPosts, setProductPosts] = useState<ProductPost[]>([]);
+  
   useEffect(() => {
     // メインビジュアルロゴアニメーションの発火のみ（トップページ専用）
     const logoArea = document.querySelector(".mvLogoArea");
     if (logoArea) {
       logoArea.classList.add("js-on");
     }
+
+    // ↓ 事例データを取得してスライダーにセットする処理を追加
+    getRecentProducts(8).then((res) => {
+      setProductPosts(res.contents);
+    });
+    
   }, []);
 
   // 白帯のアニメーション設定
