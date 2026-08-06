@@ -2127,9 +2127,7 @@ li:not(:last-child) {
 .pageProductPost .scPageContets {
 	overflow-x: hidden;
 }
-.pageProductPost .postArea {
-	padding: 0 0 15rem 0;
-}
+
 
 .pageProductPost .postArea .postTitle {
 	font-weight: 700;
