@@ -57,7 +57,7 @@ export default function ProductSlider({ posts }: Props) {
                 style={{
                   display: "block",
                   width: "100%",
-                  aspectRatio: "16 / 9",
+                  aspectRatio: "4 / 3",
                   overflow: "hidden",
                 }}
               >
