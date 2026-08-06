@@ -23,26 +23,11 @@ export default async function Home() {
         <div className="mvWrap">
           <div className="passing-box titleArea">
             <h2 className="mvTitle">
-              <div
-                className="mv-passing-bar"
-                style={{
-                  position: "relative",
-                  display: "inline-block",
-                  overflow: "hidden",
-                }}
-              >
+              <div className="mv-passing-bar">
                 <span className="mv-passing-txt">ワザワザやる</span>
               </div>
               <br />
-              <div
-                className="mv-passing-bar"
-                style={{
-                  position: "relative",
-                  display: "inline-block",
-                  overflow: "hidden",
-                  marginTop: "1rem",
-                }}
-              >
+              <div className="mv-passing-bar">
                 <span className="mv-passing-txt">ワクワクする</span>
               </div>
             </h2>
