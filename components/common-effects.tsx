@@ -7,15 +7,23 @@ export default function CommonEffects() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // -------------------------------------------------------------
-    // 【KEYV用】キービジュアルの帯アニメーション（.move / .on）を発火
-    // -------------------------------------------------------------
-    document.querySelectorAll(".mv-passing-bar").forEach((el) => {
-      el.classList.add("move", "on");
-    });
-    document.querySelectorAll(".mvLogoArea").forEach((el) => {
-      el.classList.add("js-on", "on");
-    });
+    // KEYV用：確実にDOMが配置された後にアニメーションを発火させる関数
+    const triggerMvAnimation = () => {
+      const passingBars = document.querySelectorAll(".mv-passing-bar");
+      passingBars.forEach((el) => {
+        el.classList.add("move", "on");
+      });
+
+      const logoAreas = document.querySelectorAll(".mvLogoArea");
+      logoAreas.forEach((el) => {
+        el.classList.add("js-on", "on");
+      });
+    };
+
+    // 即時実行 ＋ タイマー実行で確実にDOMへクラスを付与
+    triggerMvAnimation();
+    const timer1 = setTimeout(triggerMvAnimation, 100);
+    const timer2 = setTimeout(triggerMvAnimation, 500);
 
     // 1. タイトルテキストの1文字ずつ<span>分割処理
     const titleTargets = document.querySelectorAll(
@@ -101,7 +109,7 @@ export default function CommonEffects() {
     };
 
     window.addEventListener("scroll", handleScrollAndLoad);
-    handleScrollAndLoad(); // 初回ロード時実行
+    handleScrollAndLoad();
 
     // 4. 同一ページ内のスムーススクロール処理
     const handleAnchorClick = (e: MouseEvent) => {
@@ -170,6 +178,8 @@ export default function CommonEffects() {
     }
 
     return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
       window.removeEventListener("scroll", handleScrollAndLoad);
       links.forEach((link) =>
         link.removeEventListener("click", handleAnchorClick as EventListener)
