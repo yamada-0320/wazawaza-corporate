@@ -4,8 +4,15 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Contact from "@/components/contact";
+import ProductSlider from "@/components/ProductSlider"; // 追加
+import { getRecentProducts } from "@/lib/microcms"; // 追加
+
+export const revalidate = 60;
 
 export default function Home() {
+  const response = await getRecentProducts(8);
+  const productPosts = response.contents;
+  
   useEffect(() => {
     // メインビジュアルロゴアニメーションの発火のみ（トップページ専用）
     const logoArea = document.querySelector(".mvLogoArea");
@@ -292,9 +299,7 @@ export default function Home() {
         </div>
 
         {/* 事例スライダーエリア */}
-        <div className="productSider">
-          <p className="empty_list">事例はありません</p>
-        </div>
+        <ProductSlider posts={productPosts} />
 
         <p className="btn">
           <Link href="/product/">他の事例をみる</Link>
