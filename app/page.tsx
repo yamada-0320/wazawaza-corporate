@@ -8,7 +8,7 @@ import { getRecentProducts } from "@/lib/microcms"; // 追加
 
 export const revalidate = 60;
 
-export default function Home() {
+export default async function Home() {
   const response = await getRecentProducts(8);
   const productPosts = response.contents;
   
