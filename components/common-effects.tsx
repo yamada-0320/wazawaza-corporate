@@ -7,92 +7,94 @@ export default function CommonEffects() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // 1. タイトルテキストの1文字ずつ<span>分割処理
-    const titleTargets = document.querySelectorAll(
-      ".scTitle .en, .scTitle .jp, .pageHeadText h2 .en, .pageHeadText h2 .jp"
-    );
-
-    titleTargets.forEach((el) => {
-      if (!el.classList.contains("js-split")) {
-        const text = el.textContent || "";
-        el.innerHTML = text
-          .split("")
-          .map((char) => (char.trim() === "" ? " " : `<span>${char}</span>`))
-          .join("");
-        el.classList.add("js-split");
-      }
-    });
-
-    // 2. 文字アニメーション関数
-    const animateSpans = (el: Element, speed: number) => {
-      if (el.classList.contains("js-animated")) return;
-      el.classList.add("js-animated");
-      const spans = el.querySelectorAll("span");
-      spans.forEach((span, index) => {
-        setTimeout(() => {
-          span.classList.add("active");
-        }, index * speed);
-      });
-    };
-
-    // 3. スクロール ＆ ロード時判定（passing-bar, フェードイン, 文字演出）
-    const handleScrollAndLoad = () => {
-      const windowHeight = window.innerHeight;
-      const scroll = window.scrollY;
-
-      // passing-bar
-      document.querySelectorAll(".passing-bar").forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        const imgPos = rect.top + scroll;
-        if (scroll > imgPos - windowHeight + windowHeight / 4) {
-          el.classList.add("move");
+    // ページ切り替え（DOMレンダリング完了）を少し待ってから実行
+    const timer = setTimeout(() => {
+      // 1. タイトルテキストの1文字ずつ<span>分割処理
+      const titleTargets = document.querySelectorAll(
+        ".scTitle .en, .scTitle .jp, .pageHeadText h2 .en, .pageHeadText h2 .jp"
+      );
+      titleTargets.forEach((el) => {
+        if (!el.classList.contains("js-split")) {
+          const text = el.textContent || "";
+          el.innerHTML = text
+            .split("")
+            .map((char) => (char.trim() === "" ? " " : `<span>${char}</span>`))
+            .join("");
+          el.classList.add("js-split");
         }
       });
 
-      // scTitle (.en, .jp)
-      document.querySelectorAll(".scTitle .en, .scTitle .jp").forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        const elemPos = rect.top + scroll;
-        if (scroll > elemPos - windowHeight + 70) {
-          animateSpans(el, 60);
-        }
-      });
+      // 2. 文字アニメーション関数
+      const animateSpans = (el: Element, speed: number) => {
+        if (el.classList.contains("js-animated")) return;
+        el.classList.add("js-animated");
+        const spans = el.querySelectorAll("span");
+        spans.forEach((span, index) => {
+          setTimeout(() => {
+            span.classList.add("active");
+          }, index * speed);
+        });
+      };
 
-      // pageHeadText h2 (.en, .jp)
-      document
-        .querySelectorAll(".pageHeadText h2 .en, .pageHeadText h2 .jp")
-        .forEach((el) => {
+      // 3. スクロール ＆ ロード時判定（passing-bar, フェードイン, 文字演出）
+      const handleScrollAndLoad = () => {
+        const windowHeight = window.innerHeight;
+        const scroll = window.scrollY;
+
+        // passing-bar
+        document.querySelectorAll(".passing-bar").forEach((el) => {
           const rect = el.getBoundingClientRect();
-          const elemPos = rect.top + scroll;
-          if (scroll > elemPos - windowHeight + 70) {
-            animateSpans(el, 80);
+          const imgPos = rect.top + scroll;
+          if (scroll > imgPos - windowHeight + windowHeight / 4) {
+            el.classList.add("move");
           }
         });
 
-      // js-fadeUp
-      document.querySelectorAll(".js-fadeUp").forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        const elemPos = rect.top + scroll;
-        if (scroll > elemPos - windowHeight + 80) {
-          el.classList.add("on");
-        }
-      });
+        // scTitle (.en, .jp)
+        document.querySelectorAll(".scTitle .en, .scTitle .jp").forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          const elemPos = rect.top + scroll;
+          if (scroll > elemPos - windowHeight + 70) {
+            animateSpans(el, 60);
+          }
+        });
 
-      // spFloat (800pxスクロールで表示制御)
-      const spFloat = document.querySelector(".spFloat") as HTMLElement;
-      if (spFloat) {
-        if (scroll > 800) {
-          spFloat.style.display = "block";
-          spFloat.style.opacity = "1";
-        } else {
-          spFloat.style.display = "none";
-          spFloat.style.opacity = "0";
-        }
-      }
-    };
+        // pageHeadText h2 (.en, .jp)
+        document
+          .querySelectorAll(".pageHeadText h2 .en, .pageHeadText h2 .jp")
+          .forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            const elemPos = rect.top + scroll;
+            if (scroll > elemPos - windowHeight + 70) {
+              animateSpans(el, 80);
+            }
+          });
 
-    window.addEventListener("scroll", handleScrollAndLoad);
-    handleScrollAndLoad(); // 初回ロード時実行
+        // js-fadeUp
+        document.querySelectorAll(".js-fadeUp").forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          const elemPos = rect.top + scroll;
+          if (scroll > elemPos - windowHeight + 80) {
+            el.classList.add("on");
+          }
+        });
+
+        // spFloat (800pxスクロールで表示制御)
+        const spFloat = document.querySelector(".spFloat") as HTMLElement;
+        if (spFloat) {
+          if (scroll > 800) {
+            spFloat.style.display = "block";
+            spFloat.style.opacity = "1";
+          } else {
+            spFloat.style.display = "none";
+            spFloat.style.opacity = "0";
+          }
+        }
+      };
+
+      window.addEventListener("scroll", handleScrollAndLoad);
+      handleScrollAndLoad(); // 初回ロード時実行
+    }, 100);
 
     // 4. 同一ページ内のスムーススクロール処理
     const handleAnchorClick = (e: MouseEvent) => {
@@ -108,7 +110,6 @@ export default function CommonEffects() {
           e.preventDefault();
           const isDesktop = window.innerWidth > 834;
           const headerOffset = isDesktop ? 140 : 60;
-
           const elementPosition =
             targetElement.getBoundingClientRect().top + window.scrollY;
           const offsetPosition = elementPosition - headerOffset;
@@ -146,7 +147,6 @@ export default function CommonEffects() {
     if (window.location.hash) {
       const urlHash = window.location.hash;
       window.scrollTo(0, 0);
-
       setTimeout(() => {
         const target = document.querySelector(urlHash);
         if (target) {
@@ -154,7 +154,6 @@ export default function CommonEffects() {
           const headerOffset = isSp ? 70 : 140;
           const position =
             target.getBoundingClientRect().top + window.scrollY - headerOffset;
-
           window.scrollTo({
             top: position,
             behavior: "smooth",
@@ -164,7 +163,7 @@ export default function CommonEffects() {
     }
 
     return () => {
-      window.removeEventListener("scroll", handleScrollAndLoad);
+      clearTimeout(timer);
       links.forEach((link) =>
         link.removeEventListener("click", handleAnchorClick as EventListener)
       );
