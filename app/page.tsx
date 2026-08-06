@@ -21,7 +21,7 @@ export default async function Home() {
       {/* メインビジュアル (keyv) */}
       <section className="scMv" style={{ display: "block" }}>
         <div className="mvWrap">
-          <div className="passing-box titleArea">
+          <div className="passing-box titleArea move">
             <h2 className="mvTitle">
               <div className="mv-passing-bar">
                 <span className="mv-passing-txt">ワザワザやる</span>
