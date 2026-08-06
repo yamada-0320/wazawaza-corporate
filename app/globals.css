@@ -2145,7 +2145,7 @@ li:not(:last-child) {
 
 .pageProductPost .c-carousel .c-carousel__item a img {
 	width: 100%;
-	aspect-ratio: 4 / 3;
+	aspect-ratio: 16 / 9;
 	object-fit: cover;
 }
 
@@ -5756,7 +5756,6 @@ input[type=radio] +span::after {
 
 .c-carousel__item .sliderItem img {
   width: 100%;
-  height: 180px;
   object-fit: cover; /* 画像の比率を保ったまま枠に収める */
   display: block;
 }
@@ -5766,7 +5765,7 @@ input[type=radio] +span::after {
   .c-carousel__item {
     width: calc(50% - 10px); /* スマホは2列表示 */
   }
-  .c-carousel__item .sliderItem img {
-    height: 120px;
-  }
+	.c-carousel {
+		padding:0 20px;
+	}
 }
