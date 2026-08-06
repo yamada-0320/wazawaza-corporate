@@ -34,7 +34,7 @@ export default function CommonEffects() {
       });
     };
 
-    // 3. スクロール ＆ ロード時判定
+    // 3. スクロール ＆ ロード時判定（passing-bar, フェードイン, 文字演出）
     const handleScrollAndLoad = () => {
       const windowHeight = window.innerHeight;
       const scroll = window.scrollY;
@@ -77,7 +77,7 @@ export default function CommonEffects() {
         }
       });
 
-      // spFloat
+      // spFloat (800pxスクロールで表示制御)
       const spFloat = document.querySelector(".spFloat") as HTMLElement;
       if (spFloat) {
         if (scroll > 800) {
@@ -91,9 +91,9 @@ export default function CommonEffects() {
     };
 
     window.addEventListener("scroll", handleScrollAndLoad);
-    handleScrollAndLoad();
+    handleScrollAndLoad(); // 初回ロード時実行
 
-    // スムーススクロール処理
+    // 4. 同一ページ内のスムーススクロール処理
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.currentTarget as HTMLAnchorElement;
       const href = target.getAttribute("href");
@@ -116,6 +116,7 @@ export default function CommonEffects() {
             behavior: "smooth",
           });
 
+          // モバイルメニューが開いている場合のクローズ処理
           const headerWrap = document.querySelector(".headerWrap");
           if (headerWrap && headerWrap.classList.contains("bgBlack")) {
             headerWrap.classList.remove("bgBlack");
@@ -138,6 +139,25 @@ export default function CommonEffects() {
     links.forEach((link) =>
       link.addEventListener("click", handleAnchorClick as EventListener)
     );
+
+    // 5. 内部リンク別ページ（URLにハッシュが含まれる場合の着地処理）
+    if (window.location.hash) {
+      const urlHash = window.location.hash;
+      window.scrollTo(0, 0);
+      setTimeout(() => {
+        const target = document.querySelector(urlHash);
+        if (target) {
+          const isSp = window.matchMedia("(max-width: 639px)").matches;
+          const headerOffset = isSp ? 70 : 140;
+          const position =
+            target.getBoundingClientRect().top + window.scrollY - headerOffset;
+          window.scrollTo({
+            top: position,
+            behavior: "smooth",
+          });
+        }
+      }, 100);
+    }
 
     return () => {
       window.removeEventListener("scroll", handleScrollAndLoad);
