@@ -1,12 +1,11 @@
 import Link from "next/link";
 import Contact from "@/components/contact";
+import ProductSlider from "@/components/ProductSlider";
 import { getRecentProducts } from "@/lib/microcms";
 
-// 60秒ごとに再生成（ISR）
 export const revalidate = 60;
 
 export default async function Home() {
-  // microCMSから事例を取得（最新8件）
   const response = await getRecentProducts(8);
   const productPosts = response.contents;
 
@@ -225,27 +224,8 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* 事例スライダーエリア（PHPのマークアップを忠実に適用） */}
-        <div className="productSider">
-          {productPosts && productPosts.length > 0 ? (
-            productPosts.map((item) => {
-              const thumb =
-                item.thumbnail?.url || "/assets/img/common/no_image.jpg";
-              return (
-                <Link
-                  key={item.id}
-                  href={`/product/detail/?id=${item.id}`}
-                  className="sliderItem"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={thumb} alt={item.title} />
-                </Link>
-              );
-            })
-          ) : (
-            <p className="empty_list">事例はありません</p>
-          )}
-        </div>
+        {/* スライダーコンポーネント */}
+        <ProductSlider posts={productPosts} />
 
         <p className="btn">
           <Link href="/product/">他の事例をみる</Link>
