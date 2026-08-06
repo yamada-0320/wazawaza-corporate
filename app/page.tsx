@@ -16,6 +16,11 @@ export default function Home() {
     if (logoArea) {
       logoArea.classList.add("js-on");
     }
+
+    // ↓ 事例データを取得してスライダーにセットする処理を追加
+    getRecentProducts(8).then((res) => {
+      setProductPosts(res.contents);
+    });
     
   }, []);
 
@@ -297,7 +302,7 @@ export default function Home() {
         </div>
 
         {/* 事例スライダーエリア */}
-        <ProductSlider />
+        <ProductSlider posts={productPosts} />
 
         <p className="btn">
           <Link href="/product/">他の事例をみる</Link>
