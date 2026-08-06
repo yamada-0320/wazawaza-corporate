@@ -5732,11 +5732,11 @@ input[type=radio] +span::after {
   padding: 0;
   margin: 0 auto 40px;
   justify-content: center;
-	max-width:1000px;
+  max-width: 1000px;
 }
 
 .c-carousel__item {
-  width: calc(25% - 15px); /* 4列表示 */
+  width: calc(25% - 15px);
   box-sizing: border-box;
 }
 
@@ -5754,19 +5754,19 @@ input[type=radio] +span::after {
 
 .c-carousel__item .sliderItem img {
   width: 100%;
-  object-fit: cover; /* 画像の比率を保ったまま枠に収める */
+  object-fit: cover;
   display: block;
 }
 
-/* スマホ・タブレット表示用のレスポンシブ対応 */
 @media screen and (max-width: 768px) {
   .c-carousel__item {
-    width: calc(50% - 10px); /* スマホは2列表示 */
+    width: calc(50% - 10px);
   }
-	.c-carousel {
-		padding:0 20px;
-	}
+  .c-carousel {
+    padding: 0 20px;
+  }
 }
+
 /* ==========================================
  * 下層ページ (PageHead) タイトルの確実な表示補正
  * ========================================== */
