@@ -5767,13 +5767,3 @@ input[type=radio] +span::after {
   }
 }
 
-/* ==========================================
- * 下層ページ (PageHead) タイトルの確実な表示補正
- * ========================================== */
-.PageHead .pageHeadText,
-.PageHead .pageHeadText h2,
-.PageHead .pageHeadText span {
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: none !important;
-}
