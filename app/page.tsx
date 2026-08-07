@@ -1,21 +1,10 @@
-"use client";
-
-import { useEffect } from "react";
 import Link from "next/link";
 import Contact from "@/components/contact";
 import MvTitle from "@/components/MvTitle";
 import ProductSlider from "@/components/ProductSlider";
 
 export default function Home() {
-  useEffect(() => {
-    // メインビジュアルロゴアニメーションの発火のみ（トップページ専用）
-    const logoArea = document.querySelector(".mvLogoArea");
-    if (logoArea) {
-      logoArea.classList.add("js-on");
-    }
-  }, []);
-
-
+  
   const svgStyle = {
     fill: "none",
     stroke: "#FFFFFF",
@@ -32,7 +21,7 @@ export default function Home() {
             <MvTitle />
           </div>
 
-          <div className="mvLogoArea">
+          <div className="mvLogoArea js-on">
             <div className="logoLeft">
               <svg version="1.1" viewBox="0 0 484.5 232.9">
                 <g>
