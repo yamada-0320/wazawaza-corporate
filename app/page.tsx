@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import Contact from "@/components/contact";
 import MvTitle from "@/components/MvTitle";
+import ProductSlider from "@/components/ProductSlider";
 
 export default function Home() {
   useEffect(() => {
@@ -199,9 +200,7 @@ export default function Home() {
         </div>
 
         {/* 事例スライダーエリア */}
-        <div className="productSider">
-          <p className="empty_list">事例はありません</p>
-        </div>
+        <ProductSlider />
 
         <p className="btn">
           <Link href="/product/">他の事例をみる</Link>
