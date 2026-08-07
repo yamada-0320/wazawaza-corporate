@@ -1,27 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Contact from "@/components/contact";
-import ProductSlider from "@/components/ProductSlider";
-import { getRecentProducts } from "@/lib/microcms";
 
 export default function Home() {
-  const [productPosts, setProductPosts] = useState<any[]>([]);
-  
   useEffect(() => {
     // メインビジュアルロゴアニメーションの発火のみ（トップページ専用）
     const logoArea = document.querySelector(".mvLogoArea");
     if (logoArea) {
       logoArea.classList.add("js-on");
     }
-
-    // ↓ 事例データを取得してスライダーにセットする処理を追加
-    getRecentProducts(8).then((res) => {
-      setProductPosts(res.contents);
-    });
-    
   }, []);
 
   // 白帯のアニメーション設定
@@ -302,7 +292,9 @@ export default function Home() {
         </div>
 
         {/* 事例スライダーエリア */}
-        <ProductSlider posts={productPosts} />
+        <div className="productSider">
+          <p className="empty_list">事例はありません</p>
+        </div>
 
         <p className="btn">
           <Link href="/product/">他の事例をみる</Link>
