@@ -295,7 +295,7 @@ export default function Home() {
         </div>
 
         {/* 事例スライダーエリア */}
-        <ProductSlider posts={productPosts} />
+        <ProductSlider />
 
         <p className="btn">
           <Link href="/product/">他の事例をみる</Link>
