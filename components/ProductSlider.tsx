@@ -1,9 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import type { Product } from "@/lib/microcms";
+import { getRecentProducts, type Product } from "@/lib/microcms";
 
 // Swiper基本スタイルの読み込み
 import "swiper/css";
@@ -12,7 +13,18 @@ type Props = {
   posts: Product[];
 };
 
-export default function ProductSlider({ posts }: Props) {
+export default function ProductSlider() {
+  const [posts, setPosts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    // クライアント側で安全に事例データを取得
+    getRecentProducts(8).then((res) => {
+      if (res && res.contents) {
+        setPosts(res.contents);
+      }
+    });
+  }, []);
+
   if (!posts || posts.length === 0) {
     return <p className="empty_list">事例はありません</p>;
   }
