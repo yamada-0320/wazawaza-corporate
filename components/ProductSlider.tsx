@@ -1,23 +1,29 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import type { Product } from "@/lib/microcms";
+import { getRecentProducts, type Product } from "@/lib/microcms";
 
-// Swiper基本スタイルの読み込み
 import "swiper/css";
 
-type Props = {
-  posts: Product[];
-};
+export default function ProductSlider() {
+  const [posts, setPosts] = useState<Product[]>([]);
 
-export default function ProductSlider({ posts }: Props) {
+  useEffect(() => {
+    // コンポーネントが描画されたらデータを取得
+    getRecentProducts(8).then((res) => {
+      if (res?.contents) {
+        setPosts(res.contents);
+      }
+    });
+  }, []);
+
   if (!posts || posts.length === 0) {
     return <p className="empty_list">事例はありません</p>;
   }
 
-  // ループ動作を安定させるため、投稿数が少ない場合は配列を複製
   const displayPosts =
     posts.length < 6 ? [...posts, ...posts, ...posts] : posts;
 
@@ -40,7 +46,7 @@ export default function ProductSlider({ posts }: Props) {
             centeredSlides: false,
           },
           1024: {
-            slidesPerView: 3.2, // 表示数を抑えて画像を大きく表示
+            slidesPerView: 3.2,
             centeredSlides: false,
           },
         }}
