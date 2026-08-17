@@ -95,7 +95,7 @@ export default function LinePage() {
           <h4 className="conTitleBox">対象となるお客様</h4>
           <div className="conImg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/uploads/2021/10/LINE−1.png" alt="対象となるお客様" />
+            <img src="/img/LINE−1.png" alt="対象となるお客様" />
           </div>
           <div className="conText">
             <p>
@@ -125,7 +125,7 @@ export default function LinePage() {
           <h4 className="conTitleBox">ご利用いただけるご依頼例</h4>
           <div className="conImg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/uploads/2021/10/pixta_82304843_M.png" alt="ご依頼例" />
+            <img src="/img/pixta_82304843_M.png" alt="ご依頼例" />
           </div>
           <div className="conText">
             <p>
@@ -157,7 +157,7 @@ export default function LinePage() {
           </h4>
           <div className="conImg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/uploads/2021/10/pixta_77664333_M.png" alt="ご相談" />
+            <img src="/img/pixta_77664333_M.png" alt="ご相談" />
           </div>
           <div className="conText">
             <p>
@@ -207,7 +207,7 @@ export default function LinePage() {
           <div style={{ textAlign: "center", marginTop: "15px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/uploads/2021/10/image8.jpg"
+              src="/img/image8.jpg"
               alt="QRコード"
               width="250"
               height="250"
@@ -229,14 +229,14 @@ export default function LinePage() {
             <div style={{ textAlign: "center", margin: "15px 0" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/uploads/2021/10/image3.jpg"
+                src="/img/image3.jpg"
                 width="300"
                 alt=""
                 style={{ border: "solid 2px #F30100", margin: "5px" }}
               />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/uploads/2021/10/image5.jpg"
+                src="/img/image5.jpg"
                 width="300"
                 alt=""
                 style={{ border: "solid 2px #F30100", margin: "5px" }}
@@ -251,21 +251,21 @@ export default function LinePage() {
             <div style={{ textAlign: "center", margin: "15px 0" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/uploads/2024/04/image4-1.webp"
+                src="/img/image4-1.webp"
                 width="300"
                 alt=""
                 style={{ border: "solid 2px #F30100", margin: "5px" }}
               />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/uploads/2021/10/image7.jpg"
+                src="/img/image7.jpg"
                 width="300"
                 alt=""
                 style={{ border: "solid 2px #F30100", margin: "5px" }}
               />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/uploads/2021/10/image2.jpg"
+                src="/img/image2.jpg"
                 width="300"
                 alt=""
                 style={{ border: "solid 2px #F30100", margin: "5px" }}
@@ -284,7 +284,7 @@ export default function LinePage() {
             <div style={{ textAlign: "center", margin: "15px 0" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/uploads/2021/10/image6.jpg"
+                src="/img/image6.jpg"
                 width="300"
                 alt=""
                 style={{ border: "solid 2px #F30100", margin: "5px" }}
