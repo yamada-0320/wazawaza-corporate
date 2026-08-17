@@ -11,7 +11,7 @@ export default function LinePage() {
   return (
     <main id="pageGeneral" className="pageService lowerPage">
       <div className="PageHead">
-        <div className="pageHeadText" style={{ opacity: 1 }}>
+        <div className="pageHeadText">
           <h2>
             <span className="en">FAST AND CONVENIENT</span>
             <br />
