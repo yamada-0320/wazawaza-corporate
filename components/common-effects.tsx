@@ -43,7 +43,7 @@ export default function CommonEffects() {
       document
         .querySelectorAll(".pageHeadText h2 .en, .pageHeadText h2 .jp")
         .forEach((el) => {
-          animateSpans(el, 60);
+          animateSpans(el, 100);
         });
 
       // passing-bar
