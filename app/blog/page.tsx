@@ -1,33 +1,51 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Contact from "@/components/contact";
 import { getPosts } from "@/lib/microcms";
+
+export const metadata: Metadata = {
+  title: "ブログ 一覧 | 株式会社WAZAWAZA",
+  description: "株式会社WAZAWAZAのブログ一覧ページです。",
+};
+
+export const revalidate = 60;
 
 type Props = {
   searchParams: Promise<{ page?: string }>;
 };
 
+// 日付フォーマット関数 (YYYY.MM.DD)
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}.${month}.${day}`;
+}
+
+// HTMLタグ除去 & 文字数制限関数
+function stripTagsAndTruncate(html: string, maxLength = 120) {
+  const cleanText = html.replace(/<[^>]*>/g, "");
+  if (cleanText.length <= maxLength) return cleanText;
+  return cleanText.slice(0, maxLength) + "...";
+}
+
 export default async function BlogPage({ searchParams }: Props) {
-  // クエリパラメータからページ番号を取得（デフォルトは 1）
-  const resolvedSearchParams = await searchParams;
-  const currentPage = Number(resolvedSearchParams.page) || 1;
+  const params = await searchParams;
+  const paged = Number(params.page) || 1;
   const limit = 6;
-  const offset = (currentPage - 1) * limit;
+  const offset = (paged - 1) * limit;
 
-  // microCMSから「ブログ」カテゴリの投稿のみを取得
-  const response = await getPosts({
-    limit,
-    offset,
-    filters: "category[contains]ブログ",
-  });
-
-  const posts = response?.contents || [];
-  const totalCount = response?.totalCount || 0;
+  // microCMSから「ブログ」カテゴリのみ取得
+  const response = await getPosts("ブログ", limit, offset);
+  const posts = response.contents;
+  const totalCount = response.totalCount;
   const maxPages = Math.ceil(totalCount / limit);
 
   return (
     <main id="pageNews" className="pageNews">
       <div className="PageHead">
-        <div className="pageHeadText">
+        <div className="pageHeadText" style={{ opacity: 1 }}>
           <h2>
             <span className="en">BLOG</span>
             <br />
@@ -39,26 +57,13 @@ export default async function BlogPage({ searchParams }: Props) {
       <section className="scPageContets">
         <div className="wrap">
           <div className="archive-list">
-            {posts.length > 0 ? (
+            {posts && posts.length > 0 ? (
               posts.map((post) => {
-                // 日付の整形 (例: 2024.01.01)
-                const date = post.publishedAt
-                  ? new Date(post.publishedAt)
-                      .toLocaleDateString("ja-JP", {
-                        year: "numeric",
-                        month: "2-digit",
-                        day: "2-digit",
-                      })
-                      .replace(/\//g, ".")
-                  : "";
-
-                // 本文からタグを除去して抜粋を作成
-                const rawContent = post.content || "";
-                const cleanText = rawContent.replace(/<[^>]*>?/gm, "");
-                const excerpt =
-                  cleanText.length > 120
-                    ? cleanText.substring(0, 120) + "..."
-                    : cleanText;
+                const date = formatDate(post.publishedAt);
+                const thumb =
+                  post.thumbnail?.url || "/assets/img/common/no_image.jpg";
+                const rawExcerpt = post.excerpt || post.content;
+                const excerpt = stripTagsAndTruncate(rawExcerpt, 120);
 
                 return (
                   <div key={post.id} className="arichive-list-item">
@@ -70,7 +75,7 @@ export default async function BlogPage({ searchParams }: Props) {
                         <div className="figure">
                           <div className="img">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={post.thumbnail.url} alt={post.title} />
+                            <img src={thumb} alt={post.title} />
                           </div>
                         </div>
                       )}
@@ -85,33 +90,27 @@ export default async function BlogPage({ searchParams }: Props) {
             )}
           </div>
 
-          {/* ページネーション */}
           {maxPages > 1 && (
             <nav className="navigation pagination">
               <div className="nav-links">
-                {Array.from({ length: maxPages }, (_, i) => i + 1).map(
-                  (pageNum) => {
-                    if (pageNum === currentPage) {
-                      return (
-                        <span
-                          key={pageNum}
-                          aria-current="page"
-                          className="page-numbers current"
-                        >
-                          {pageNum}
-                        </span>
-                      );
-                    }
-                    return (
-                      <Link
-                        key={pageNum}
-                        className="page-numbers"
-                        href={`/blog/?page=${pageNum}`}
-                      >
-                        {pageNum}
-                      </Link>
-                    );
-                  }
+                {Array.from({ length: maxPages }, (_, i) => i + 1).map((i) =>
+                  i === paged ? (
+                    <span
+                      key={i}
+                      aria-current="page"
+                      className="page-numbers current"
+                    >
+                      {i}
+                    </span>
+                  ) : (
+                    <Link
+                      key={i}
+                      className="page-numbers"
+                      href={`/blog/?page=${i}`}
+                    >
+                      {i}
+                    </Link>
+                  )
                 )}
               </div>
             </nav>
