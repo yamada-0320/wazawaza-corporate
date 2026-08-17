@@ -91,7 +91,7 @@ export default function CommonEffects() {
     // 50ms後に初回アニメーション判定を実行（span分割完了待ち）
     const timer = setTimeout(() => {
       handleScrollAndLoad();
-    }, 50);
+    }, 300);
 
     // 4. 同一ページ内のスムーススクロール処理
     const handleAnchorClick = (e: MouseEvent) => {
