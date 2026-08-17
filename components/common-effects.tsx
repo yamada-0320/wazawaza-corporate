@@ -26,8 +26,12 @@ export default function CommonEffects() {
     // 2. 文字アニメーション関数
     const animateSpans = (el: Element, speed: number) => {
       if (el.classList.contains("js-animated")) return;
-      el.classList.add("js-animated");
+      
       const spans = el.querySelectorAll("span");
+      // ▼ span がまだ分割されていない（0個の）場合は処理を保留して終了する
+      if (spans.length === 0) return;
+
+      el.classList.add("js-animated");
       spans.forEach((span, index) => {
         setTimeout(() => {
           span.classList.add("active");
