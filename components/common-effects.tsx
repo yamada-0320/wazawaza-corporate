@@ -87,7 +87,14 @@ export default function CommonEffects() {
     };
 
     window.addEventListener("scroll", handleScrollAndLoad);
-    handleScrollAndLoad();
+    const timer = setTimeout(() => {
+      handleScrollAndLoad();
+    }, 50);
+
+    return () => {
+      clearTimeout(timer); // クリーンアップ追加
+      window.removeEventListener("scroll", handleScrollAndLoad);
+      
 
     // 4. 同一ページ内のスムーススクロール処理
     const handleAnchorClick = (e: MouseEvent) => {
