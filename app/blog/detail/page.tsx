@@ -20,6 +20,8 @@ export async function generateMetadata({
 
   try {
     const post = await getPostDetail(id);
+    if (!post) return { title: "ブログ | 株式会社WAZAWAZA" };
+
     return {
       title: `${post.title} | 株式会社WAZAWAZA`,
       description: post.excerpt || post.title,
@@ -50,6 +52,10 @@ export default async function BlogDetailPage({ searchParams }: Props) {
   try {
     post = await getPostDetail(id);
   } catch {
+    notFound();
+  }
+
+  if (!post) {
     notFound();
   }
 
