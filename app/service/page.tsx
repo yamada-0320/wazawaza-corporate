@@ -123,7 +123,7 @@ export default function ServicePage() {
             <span className="jp">自分のビジネスでお悩みのあるみなさまへ</span>
           </h4>
           <div className="fBox">
-            <div className="fBoxImg">
+            <div className="fBoxImg js-fadeUp">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/img/serviceImg1.jpg" alt="WAZAWAZA" />
             </div>
@@ -144,7 +144,7 @@ export default function ServicePage() {
             <span className="jp">歯科医院のみなさまへ</span>
           </h4>
           <div className="fBox">
-            <div className="fBoxImg">
+            <div className="fBoxImg js-fadeUp">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/img/serviceImg2.jpg" alt="WAZAWAZA" />
             </div>
