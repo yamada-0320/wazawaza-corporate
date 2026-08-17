@@ -40,6 +40,12 @@ export default function CommonEffects() {
       const windowHeight = window.innerHeight;
       const scroll = window.scrollY;
 
+      document
+        .querySelectorAll(".pageHeadText h2 .en, .pageHeadText h2 .jp")
+        .forEach((el) => {
+          animateSpans(el, 60);
+        });
+
       // passing-bar
       document.querySelectorAll(".passing-bar").forEach((el) => {
         const rect = el.getBoundingClientRect();
