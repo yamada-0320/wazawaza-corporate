@@ -91,7 +91,7 @@ export default function LinePage() {
       </div>
 
       <section className="scPageContets">
-        <div className="serviceContets">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">対象となるお客様</h4>
           <div className="conImg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -121,7 +121,7 @@ export default function LinePage() {
           </div>
         </div>
 
-        <div className="serviceContets">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">ご利用いただけるご依頼例</h4>
           <div className="conImg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -151,7 +151,7 @@ export default function LinePage() {
           </div>
         </div>
 
-        <div className="serviceContets">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">
             このようなご相談は担当コンサルタントへ
           </h4>
@@ -188,7 +188,7 @@ export default function LinePage() {
           </div>
         </div>
 
-        <div className="serviceContets">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">まずは友達登録を！</h4>
           <div className="conText">
             <p>以下のボタン、またはQRコードから友達登録をしてください！</p>
@@ -215,7 +215,7 @@ export default function LinePage() {
           </div>
         </div>
 
-        <div className="serviceContets">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">ご利用画面の説明</h4>
           <div className="conText">
             <p>
@@ -307,7 +307,7 @@ export default function LinePage() {
           </div>
         </div>
 
-        <div className="serviceContets">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">
             ご不明な点は担当コンサルタント・または弊社事務局まで！
           </h4>
