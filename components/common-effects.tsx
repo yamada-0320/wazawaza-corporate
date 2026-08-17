@@ -40,6 +40,11 @@ export default function CommonEffects() {
       const windowHeight = window.innerHeight;
       const scroll = window.scrollY;
 
+      // ページ上部タイトル（親要素を可視化した上で文字アニメーションを実行）
+      document.querySelectorAll(".pageHeadText, .pageHeadText h2").forEach((el) => {
+        el.classList.add("is-active", "on");
+      });
+
       document
         .querySelectorAll(".pageHeadText h2 .en, .pageHeadText h2 .jp")
         .forEach((el) => {
