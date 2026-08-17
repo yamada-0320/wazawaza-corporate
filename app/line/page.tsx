@@ -31,7 +31,6 @@ export default function LinePage() {
                 x="0px"
                 y="0px"
                 viewBox="0 0 102.83 15.07"
-                style={{ enableBackground: "new 0 0 102.83 15.07" }}
                 xmlSpace="preserve"
               >
                 <g id="グループ_65" transform="translate(0.631 1.395)">
