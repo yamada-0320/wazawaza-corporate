@@ -98,8 +98,8 @@ export default function ServiceClinicPage() {
         </div>
       </div>
 
-      <section className="scPageContets">
-        <div className="serviceContets">
+      <section className="scPageContets ">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">歯科医院検索サイト「ココシカ！」運営</h4>
           <div className="conImg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -122,7 +122,7 @@ export default function ServiceClinicPage() {
 
         <div className="serviceContets length">
           <h4 className="conTitleBox">ホームページ制作</h4>
-          <div className="conImg">
+          <div className="conImg js-fadeUp">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/img/serviceProduction.jpg" alt="WAZAWAZA" />
           </div>
@@ -145,7 +145,7 @@ export default function ServiceClinicPage() {
           </div>
         </div>
 
-        <div className="serviceContets">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">保守サービス</h4>
           <div className="conImg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -158,7 +158,7 @@ export default function ServiceClinicPage() {
           </div>
         </div>
 
-        <div className="serviceContets">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">運用支援</h4>
           <div className="conImg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -172,7 +172,7 @@ export default function ServiceClinicPage() {
           </div>
         </div>
 
-        <div className="serviceContets">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">マーケティングコンサルテーション</h4>
           <div className="conImg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -185,7 +185,7 @@ export default function ServiceClinicPage() {
           </div>
         </div>
 
-        <div className="serviceContets">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">ブログ運営</h4>
           <div className="conImg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -198,7 +198,7 @@ export default function ServiceClinicPage() {
           </div>
         </div>
 
-        <div className="serviceContets">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">
             Googleマイビジネスページの管理監視の代行
           </h4>
@@ -214,7 +214,7 @@ export default function ServiceClinicPage() {
           </div>
         </div>
 
-        <div className="serviceContets">
+        <div className="serviceContets js-fadeUp">
           <h4 className="conTitleBox">リスティング</h4>
           <div className="conImg">
             {/* eslint-disable-next-line @next/next/no-img-element */}
