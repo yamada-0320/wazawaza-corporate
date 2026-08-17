@@ -321,7 +321,11 @@ export default function LinePage() {
         </div>
 
         {/* 共通の事例スライダーパーツを呼び出し */}
-        <div style={{ marginTop: "60px" }}>
+        <div className="productArea">
+          <h4 className="conTitle">
+              <span className="en">Product</span>
+              <span className="jp">まずは事例をみたいみなさまへ</span>
+          </h4>
           <ProductSlider />
         </div>
       </section>
