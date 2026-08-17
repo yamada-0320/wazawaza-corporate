@@ -11,7 +11,7 @@ export default function CommonEffects() {
     const titleTargets = document.querySelectorAll(
       ".scTitle .en, .scTitle .jp, .pageHeadText h2 .en, .pageHeadText h2 .jp"
     );
-    
+
     titleTargets.forEach((el) => {
       if (!el.classList.contains("js-split")) {
         const text = el.textContent || "";
@@ -87,24 +87,19 @@ export default function CommonEffects() {
     };
 
     window.addEventListener("scroll", handleScrollAndLoad);
+
+    // 50ms後に初回アニメーション判定を実行（span分割完了待ち）
     const timer = setTimeout(() => {
       handleScrollAndLoad();
     }, 50);
-
-    return () => {
-      clearTimeout(timer); // クリーンアップ追加
-      window.removeEventListener("scroll", handleScrollAndLoad);
-      
 
     // 4. 同一ページ内のスムーススクロール処理
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.currentTarget as HTMLAnchorElement;
       const href = target.getAttribute("href");
-
       if (href && (href.startsWith("#") || href.includes("/#"))) {
         const hash = href.includes("#") ? "#" + href.split("#")[1] : "";
         if (!hash || hash === "#") return;
-
         const targetElement = document.querySelector(hash);
         if (targetElement) {
           e.preventDefault();
@@ -153,7 +148,9 @@ export default function CommonEffects() {
           const isSp = window.matchMedia("(max-width: 639px)").matches;
           const headerOffset = isSp ? 70 : 140;
           const position =
-            target.getBoundingClientRect().top + window.scrollY - headerOffset;
+            target.getBoundingClientRect().top +
+            window.scrollY -
+            headerOffset;
           window.scrollTo({
             top: position,
             behavior: "smooth",
@@ -162,7 +159,9 @@ export default function CommonEffects() {
       }, 100);
     }
 
+    // クリーンアップ関数
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("scroll", handleScrollAndLoad);
       links.forEach((link) =>
         link.removeEventListener("click", handleAnchorClick as EventListener)
