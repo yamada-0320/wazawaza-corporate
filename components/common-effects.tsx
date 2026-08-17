@@ -8,7 +8,10 @@ export default function CommonEffects() {
 
   useEffect(() => {
     // 1. タイトルテキストの1文字ずつ<span>分割処理
-    const titleTargets = document.querySelectorAll(".scTitle .en, .scTitle .jp");
+    const titleTargets = document.querySelectorAll(
+      ".scTitle .en, .scTitle .jp, .pageHeadText h2 .en, .pageHeadText h2 .jp"
+    );
+    
     titleTargets.forEach((el) => {
       if (!el.classList.contains("js-split")) {
         const text = el.textContent || "";
